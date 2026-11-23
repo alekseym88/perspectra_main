@@ -10,13 +10,6 @@
     parent.append(node);
     return node;
   }
-  function addPoseBadge(container, photo) {
-    if (photo.id !== 'studio' && photo.id !== 'portrait-pose') return;
-    const badge = document.createElement('small');
-    badge.className = 'photo-beta';
-    badge.textContent = 'Beta';
-    container.append(' ', badge);
-  }
   function fittedEdges(shape) {
     const [x,y,z] = shape.size;
     const rotation = new THREE.Matrix3().set(...shape.rotation.flat());
@@ -115,10 +108,9 @@
 
   function sceneViewer(host) {
     host.innerHTML = '<div class="scene-viewport"><canvas hidden aria-hidden="true"></canvas><span class="photo-view-chip"></span><svg class="scene-stage" role="img" tabindex="0"></svg><div class="scene-preview-pip" hidden><img alt=""><span>CAMERA VIEW</span></div></div><div class="scene-tools" role="group" aria-label="Photo scene controls">'+
-      '<div class="photo-view-pair"><button type="button" data-view="camera" aria-label="Camera view" title="Camera view"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M1.5 4.5h8.5v7H1.5zM10.8 7.2l3.7-2.2v6l-3.7-2.2z"/></svg></button><button type="button" data-view="overview" aria-label="Overview" title="Overview"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1.2 14 4.5v7L8 14.8 2 11.5v-7zm0 1.7L4.1 5 8 7.1 11.9 5zM3.5 6.3v4.4l3.8 2.1V8.4zm9 0L8.7 8.4v4.4l3.8-2.1z"/></svg></button></div><button type="button" data-full aria-label="Fullscreen" title="Fullscreen"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M1.5 6V1.5H6V3H3v3zM10 1.5h4.5V6H13V3h-3zM14.5 10v4.5H10V13h3v-3zM6 14.5H1.5V10H3v3h3z"/></svg></button><div class="photo-layer-control"><button type="button" data-all aria-pressed="true" aria-label="Show or hide overlays" title="Show or hide overlays"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 3.5C4.4 3.5 1.8 6.2 1 8c.8 1.8 3.4 4.5 7 4.5s6.2-2.7 7-4.5c-.8-1.8-3.4-4.5-7-4.5zm0 7.3A2.8 2.8 0 1 1 8 5.2a2.8 2.8 0 0 1 0 5.6z"/></svg></button><button type="button" data-menu aria-expanded="false" aria-label="Overlay options" title="Overlay options"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3.5 6h9L8 11z"/></svg></button><div class="photo-layer-panel" hidden><strong>Photo overlays</strong><label>Camera guides<input type="checkbox" checked data-guides></label><label><span>Meshes</span><input type="checkbox" checked data-subject></label></div></div><label hidden>Scene scale <input type="range" min="65" max="145" value="100" data-scale><output>100%</output></label></div>'+
-      '<p class="scene-caption"><strong></strong><span></span></p>';
+      '<div class="photo-view-pair"><button type="button" data-view="camera" aria-label="Camera view" title="Camera view"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M1.5 4.5h8.5v7H1.5zM10.8 7.2l3.7-2.2v6l-3.7-2.2z"/></svg></button><button type="button" data-view="overview" aria-label="Overview" title="Overview"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1.2 14 4.5v7L8 14.8 2 11.5v-7zm0 1.7L4.1 5 8 7.1 11.9 5zM3.5 6.3v4.4l3.8 2.1V8.4zm9 0L8.7 8.4v4.4l3.8-2.1z"/></svg></button></div><button type="button" data-full aria-label="Fullscreen" title="Fullscreen"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M1.5 6V1.5H6V3H3v3zM10 1.5h4.5V6H13V3h-3zM14.5 10v4.5H10V13h3v-3zM6 14.5H1.5V10H3v3h3z"/></svg></button><div class="photo-layer-control"><button type="button" data-all aria-pressed="true" aria-label="Show or hide overlays" title="Show or hide overlays"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 3.5C4.4 3.5 1.8 6.2 1 8c.8 1.8 3.4 4.5 7 4.5s6.2-2.7 7-4.5c-.8-1.8-3.4-4.5-7-4.5zm0 7.3A2.8 2.8 0 1 1 8 5.2a2.8 2.8 0 0 1 0 5.6z"/></svg></button><button type="button" data-menu aria-expanded="false" aria-label="Overlay options" title="Overlay options"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3.5 6h9L8 11z"/></svg></button><div class="photo-layer-panel" hidden><strong>Photo overlays</strong><label>Camera guides<input type="checkbox" checked data-guides></label><label><span>Meshes</span><input type="checkbox" checked data-subject></label></div></div><label hidden>Scene scale <input type="range" min="65" max="145" value="100" data-scale><output>100%</output></label></div>';
     const find = selector=>host.querySelector(selector);
-    const stage=find('svg'), caption=find('.scene-caption'), guides=find('[data-guides]'), subject=find('[data-subject]'), scale=find('[data-scale]');
+    const stage=find('svg'), caption=host.parentElement.querySelector(':scope > .photo-run'), guides=find('[data-guides]'), subject=find('[data-subject]'), scale=find('[data-scale]');
     const canvas=find('canvas'), pip=find('.scene-preview-pip');
     const master=find('[data-all]'), menu=find('[data-menu]'), panel=find('.photo-layer-panel');
     function showMenu(open){
@@ -181,7 +173,6 @@
         orbit.lookAt(target);orbit.updateProjectionMatrix();orbit.updateMatrixWorld();
         if(solid){
           renderSolid(data,axes,span,target,cameraEye,orbit,W,H,overlays && guides.checked,overlays && subject.checked);
-          label(project(cameraEye),'Camera');
           if(foot && overlays && subject.checked)label(project(foot.clone().add(vec(0,0,1.7))),'1.70 m');
           stage.replaceChildren(content);
           return;
@@ -195,7 +186,6 @@
         const corners=[[0,0],[1,0],[1,1],[0,1]].map(([u,v])=>plane(u,v,depth));
         line([...corners,corners[0]].map(project),'#88c9ff');
         for(const corner of corners)line([cameraEye,corner].map(project),'#88c9ff');
-        label(project(cameraEye),'Camera');
       }else{
         svgNode(content,'image',{href:data.id==='coffee'?'assets/rgb.jpeg':base+data.id+'.webp',width:w,height:h});
       }
@@ -230,10 +220,12 @@
       scale.value=100;find('output').textContent='100%';scale.parentElement.hidden=!foot;
       subject.parentElement.hidden=!paths.length;
       subject.previousElementSibling.textContent=foot?'Scale figure':d.worldPaths?.length?'Bones':'Meshes';
-      caption.firstElementChild.textContent=d.name;
-      addPoseBadge(caption.firstElementChild,d);
-      caption.lastElementChild.textContent=d.fov+'° horizontal field of view · '+d.lens+' mm equivalent'+
-        (foot?' · Match the 1.70 m figure to the person using Scene scale.':'');
+      if (caption) {
+        const [modeValue, timeValue, complexityValue] = caption.querySelectorAll('dd');
+        complexityValue.textContent = d.complexity;
+        modeValue.textContent = d.mode;
+        timeValue.textContent = '≈ ' + d.processingSeconds + ' s';
+      }
       draw();
     }
     for(const button of host.querySelectorAll('[data-view]'))button.onclick=()=>{mode=button.dataset.view;draw()};
@@ -274,12 +266,16 @@
     if(d.id==='coffee'){sceneViewer(document.querySelector('#coffee-scene'))(d);continue}
     const button=document.createElement('button'),image=document.createElement('img');
     button.type='button';image.alt='';image.loading='lazy';image.src=base+d.id+'-thumb.webp';
-    button.append(image,d.name);
+    const caption=document.createElement('span');
+    caption.textContent=d.name;
+    button.append(image,caption);
+    image.width = d.width;
+    image.height = d.height;
     picks.append(button);button.setAttribute('aria-pressed','false');
     button.onclick=()=>{
-      for(const item of picks.children)item.setAttribute('aria-pressed',String(item===button));
+      for(const item of picks.querySelectorAll('button'))item.setAttribute('aria-pressed',String(item===button));
       show(d);
     };
   }
-  picks.firstElementChild.click();
+  picks.querySelector('button').click();
 })();

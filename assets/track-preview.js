@@ -1225,7 +1225,7 @@ class Timeline {
     }
     // Pixel error on a linear axis; keep gaps where diagnostics are unavailable.
     const R = j.rows, curve = this.curve, gh = L.gb - L.gt;
-    if (gh > 8 && j.comparison !== 'rig' && !j.primitivePreview && !j.skeletons && !j.cameraReview && j.preset !== 'Saved Blender camera') {
+    if (gh > 8 && curve?.some(Number.isFinite) && j.comparison !== 'rig' && (!j.primitivePreview || this.hasPixelErrors) && !j.skeletons && !j.cameraReview && j.preset !== 'Saved Blender camera') {
       const yOf = (v) => L.gb - Math.min(1, v) * gh;
       g.font = `500 9px ${FONT}`; g.textAlign = "left"; g.textBaseline = "bottom";
       for (const v of [0.5, 1]) {
@@ -1318,6 +1318,9 @@ button,input{font:inherit;color:inherit}
 .stage.hot{cursor:pointer}
 .chip{position:absolute;z-index:5;display:flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:6px;
   background:rgba(22,22,26,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--pp-line);white-space:nowrap}
+.viewport-selector{position:absolute;z-index:6;top:7px;right:8px;max-width:calc(100% - 16px)}
+.stage:has(.verdict:not([hidden])) .viewport-selector{top:39px}
+@container (max-width:540px){.viewport-selector{top:39px}}
 .info{top:7px;left:8px;min-width:75px}
 .info b{font-weight:600}
 .info .sep{width:1px;height:12px;background:rgba(255,255,255,.18)}
@@ -1510,6 +1513,7 @@ class PerspectraPreview extends HTMLElement {
       <div class="stage camera" part="viewport">
         <video class="main-video" muted playsinline preload="auto" width="1280" height="676" aria-label="Original footage"></video>
         <canvas class="gl"></canvas><canvas class="ov"></canvas>
+        <div class="viewport-selector"><slot name="model-controls"></slot></div>
         <div class="chip info"><span class="f">Frame <em class="fn">—</em></span></div>
         <div class="pop info-pop" role="dialog" aria-label="Camera and footage details"></div>
         <div class="chip verdict" role="button" tabindex="0" data-pop="verdict-pop" aria-expanded="false" hidden></div>
@@ -1575,7 +1579,7 @@ class PerspectraPreview extends HTMLElement {
           </div>
         </div>
       </div>
-      <slot name="model-controls"></slot><canvas class="tl" part="timeline" aria-label="Tracking timeline" aria-describedby="timeline-description"></canvas>
+      <canvas class="tl" part="timeline" aria-label="Tracking timeline" aria-describedby="timeline-description"></canvas>
       <p class="timeline-note" id="timeline-description"><svg width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><path d="M1 10C5 10 4 2 8 2S11 10 15 7s4-3 6-3" fill="none" stroke="currentColor" stroke-width="2"/></svg> <strong>Curve: image-fit error <span class="error-unit">(px)</span>.</strong> Lower means a closer match between projected 3D points and image tracks at the analysis resolution. Peaks mark frames to inspect. The coloured strip shows tracking health. Click or drag to scrub; use the frame controls to step.</p>
       <div class="foot" part="footer">
         <div class="legend"></div>
@@ -1701,8 +1705,13 @@ class PerspectraPreview extends HTMLElement {
         if (input?.dataset.v === 'geometry') row.firstChild.textContent = 'Mesh ';
       }
       if (j.comparison === 'bridge') Object.assign(this.v, {grid:false,path:false});
-      if (j.primitivePreview) this.$('.timeline-note').textContent = 'Scrub to check the fitted geometry against the footage.';
+      if (j.primitivePreview && j.rows.err?.some(Number.isFinite)) this.$('.timeline-note').textContent = 'The curve shows image-fit error in pixels. The strip below shows tracking health.';
     }
+    if (j.primitivePreview && !j.timelineNote && !j.rows.err?.some(Number.isFinite)) {
+      this.$('.timeline-note').hidden = true;
+      this.$('.tl').removeAttribute('aria-describedby');
+    }
+    if (j.timelineNote) this.$('.timeline-note').textContent = j.timelineNote;
     if (this.hasAttribute("lanes")) this.v.lanes = true;
     this.$(".range").textContent = `${d.playback.fs}–${d.playback.fe} · ${+d.fps.toFixed(3)} fps`;
     this._legend(); this._verdict(j.health); this._ui(); this._syncMenu();
@@ -1868,6 +1877,11 @@ class PerspectraPreview extends HTMLElement {
     const pip = this.$(".pip");
     pip.addEventListener("click", () => this.setMode("camera"));
     pip.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), this.setMode("camera")));
+    // Keep selector gestures local while radio changes still reach the gallery.
+    const selector = this.$(".viewport-selector");
+    for (const type of ["pointerdown", "pointermove", "pointerup", "wheel", "dblclick"]) {
+      selector.addEventListener(type, event => event.stopPropagation());
+    }
     // hover / select in the viewport
     const st = this.$(".stage");
     let down = null;

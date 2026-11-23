@@ -124,12 +124,15 @@
   };
   function updateSelection() {
     const entry = entryFor(clip[0]), ready = !!selectedResult(entry);
-    $('#clip-title').textContent = clip[1];
-    const playback = entry?.presentation?.playback, trimmed = playback?.trimmedEndFrames > 0;
-    const coverage = ready ? (entry.coverage === 'full' ? (trimmed ? 'Trimmed playback · ' : '') + durationLabel(entry) : '6-second preview')
-      : 'Tracking preview pending · ' + Number(entry.sourceDuration.toFixed(1)) + 's source';
-    const mode = ready ? (['fast','normal'].includes(cameraMode) ? 'Tracking mode · ' : '') + cameraLabel(entry,cameraMode) + ' · ' : '';
-    $('#clip-detail').textContent = mode + coverage + ' · ' + clip[3] + ' fps';
+    const seconds = selectedResult(entry)?.processingSeconds;
+    const minutes = Math.round(seconds / 60);
+    const runtime = minutes >= 60 ? Math.floor(minutes / 60) + ' h ' + minutes % 60 + ' min' : minutes + ' min';
+    $('#clip-detail').hidden = !ready;
+    $('#clip-mode').textContent = cameraLabel(entry, cameraMode);
+    $('#clip-runtime').hidden = !Number.isFinite(seconds);
+    $('#clip-runtime dd').textContent = Number.isFinite(seconds) ? '≈ ' + runtime : '';
+    $('#clip-detail-status').hidden = ready;
+    $('#clip-detail-status').textContent = 'Tracking preview pending';
     $('#launch-automatic').disabled = !ready;
     $('#launch-automatic').lastElementChild.textContent = ready ? 'Track video' : 'Tracking preview pending';
     const original = $('#clip-original');
@@ -155,6 +158,7 @@
     $('#clip-poster').alt = clip[1] + ' source footage';
     $$('[data-clip]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.clip === clip[0])));
   }
+  const clipTrack = $('#tracking-clips');
   for (const c of clips) {
     const entry = entryFor(c[0]);
     const button = document.createElement('button'); button.dataset.clip = c[0]; button.type = 'button';
@@ -172,7 +176,32 @@
       $('#automatic-message').hidden = true; $('#automatic-cover').hidden = false;
       if (automaticStarted && selectedResult(entry)) loadAutomatic();
     });
-    $(portrait ? '#portrait-clips' : '#landscape-clips').append(button);
+    button.classList.toggle('portrait-clip', portrait);
+    clipTrack.append(button);
+  }
+  for (const clipCatalog of $$('[data-clip-rail]')) {
+    const track = clipCatalog.firstElementChild;
+    const previousClips = clipCatalog.querySelector('.previous');
+    const nextClips = clipCatalog.querySelector('.next');
+    function updateClipArrows() {
+      const remaining = track.scrollWidth - track.clientWidth - track.scrollLeft;
+      previousClips.hidden = track.scrollLeft <= 1;
+      nextClips.hidden = remaining <= 1;
+    }
+    function pageClips(direction) {
+      const gap = parseFloat(getComputedStyle(track).columnGap);
+      const stride = track.firstElementChild.getBoundingClientRect().width + gap;
+      const columns = Math.max(1, Math.floor((track.clientWidth + gap) / stride));
+      track.scrollBy({
+        left: direction * columns * stride,
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+      });
+    }
+    previousClips.addEventListener('click', () => pageClips(-1));
+    nextClips.addEventListener('click', () => pageClips(1));
+    track.addEventListener('scroll', updateClipArrows, {passive: true});
+    new ResizeObserver(updateClipArrows).observe(track);
+    updateClipArrows();
   }
   async function loadAutomatic() {
     automaticStarted = true;
@@ -243,6 +272,7 @@
     const launch = cover.querySelector('button');
     const mount = section.querySelector('.comparison-viewer');
     const message = section.querySelector('[role=status]');
+    const controls = section.querySelector('.pose-display');
     let current = null, sequence = 0;
     async function inspect() {
       const ticket = ++sequence;
@@ -270,6 +300,8 @@
         const player = await viewer(data, url(section.dataset.footage), url(section.dataset.poster),
           mount, {frame: frame ?? data.frames.start, mode, hidden:true});
         if (ticket !== sequence) { player.remove(); return; }
+        player.append(controls);
+        controls.hidden = false;
         current?.remove();
         current = player;
         current.dataset.variant = variant;
@@ -309,7 +341,6 @@
       const item = scans.querySelector('[data-scan][aria-pressed=true]');
       const key = item.dataset.scan, folder = 'scans/' + key + '/';
       const isMesh = scans.querySelector('[name=scan-view]:checked').value === 'mesh';
-      scans.querySelector('.demo-heading strong').textContent = item.textContent;
       scans.querySelector('.scan-cover').hidden = true;
       const original = scans.querySelector('.media-links a');
       original.href = url(item.dataset.original);
@@ -358,7 +389,7 @@
   const poseMount = poseGallery.querySelector('.comparison-viewer');
   const poseMessage = poseGallery.querySelector('[role=status]');
   let posePlayer, poseTicket = 0;
-  async function inspectPose(button) {
+  async function inspectPose(button, launchOverview = false) {
     const ticket = ++poseTicket;
     const key = button.dataset.pose;
     const folder = 'full/' + key + '/';
@@ -367,7 +398,6 @@
     modelControls.querySelector('label[for=model-mixamo] span').textContent = 'Maximo';
     bonesChoice.parentElement.hidden = hands;
     if (hands && bonesChoice.checked) modelControls.querySelector('#model-anny').checked = true;
-    poseGallery.querySelector('.demo-heading span').textContent = hands ? 'Finger tracks' : 'Animated bodies';
     const display = modelControls.querySelector('[name=pose-model]:checked').value;
     const model = display === 'mixamo' ? 'mixamo' : 'anny';
     const fittedYBot = display === 'mixamo' && ['pose-6868294', 'pose-21827'].includes(key);
@@ -375,14 +405,13 @@
     const templateFile = {anny:maleAnny ? 'human-body-anny-male.js' : 'human-body-anny.js', mixamo:fittedYBot ? 'human-ybot-fit.js' : 'human-ybot.js', bones:'human-bones.js'}[display];
     const sameClip = posePlayer?.dataset.clip === key;
     const previousFrame = sameClip ? posePlayer.pb.shown : null;
-    const mode = sameClip ? posePlayer.mode : 'camera';
+    const mode = sameClip ? posePlayer.mode : launchOverview ? 'overview' : 'camera';
     const resume = sameClip && posePlayer.pb.playing;
     const rig = sameClip && posePlayer.rig;
     const orbit = rig ? {target:rig.target.clone(), az:rig.az, el_:rig.el_, r:rig.r} : null;
     posePlayer?.pause();
     poseCover.hidden = !!posePlayer;
-    poseCover.querySelector('img').src = button.querySelector('img').src;
-    $('#pose-title').textContent = button.querySelector('span').textContent;
+    if (!launchOverview) poseCover.querySelector('img').src = button.querySelector('img').src;
     for (const card of poseGallery.querySelectorAll('[data-pose]')) card.setAttribute('aria-pressed', String(card === button));
     poseMessage.hidden = true;
     poseLaunch.disabled = true;
@@ -393,7 +422,7 @@
       ]);
       if (ticket !== poseTicket) return;
       const scene = {...window.PerspectraExamples[key + '-' + model], poseDisplay:display, poseDisplayTemplate:maleAnny ? 'anny-male' : fittedYBot ? 'ybot-fit' : undefined};
-      const first = Math.min(...scene.skeletons.map(rig => rig.visible.indexOf(true)).filter(frame => frame >= 0)) + scene.frames.start;
+      const first = Number(launchOverview ? poseCover.querySelector('img').dataset.overviewFrame : button.dataset.posterFrame);
       const player = await viewer(scene, url(folder + 'source.mp4?v=' + scene.video.clipStart + '-' + scene.video.frames), button.querySelector('img').src, poseMount,
         {mode, frame:previousFrame ?? first, orbit, hidden:true});
       if (ticket !== poseTicket) { player.remove(); return; }
@@ -412,7 +441,6 @@
         if (posePlayer) {
           modelControls.querySelector('[name=pose-model][value="'+posePlayer.d.j.poseDisplay+'"]').checked = true;
           for (const card of poseGallery.querySelectorAll('[data-pose]')) card.setAttribute('aria-pressed', String(card.dataset.pose === posePlayer.dataset.clip));
-          $('#pose-title').textContent = poseGallery.querySelector('[data-pose][aria-pressed=true]').textContent;
         }
         poseMessage.hidden = false;
         poseMessage.textContent = 'Could not load this body. ' + error.message;
@@ -421,7 +449,10 @@
       if (ticket === poseTicket) poseLaunch.disabled = false;
     }
   }
-  poseLaunch.addEventListener('click', () => inspectPose(poseGallery.querySelector('[aria-pressed="true"]')));
+  poseLaunch.addEventListener('click', () => {
+    const card = poseGallery.querySelector('[data-pose][aria-pressed="true"]');
+    inspectPose(card, poseCover.querySelector('img').src.includes('/pose-overview.webp'));
+  });
   for (const button of poseGallery.querySelectorAll('[data-pose]')) button.addEventListener('click', () => inspectPose(button));
   function openLinkedPose() {
     const card = Array.from(poseGallery.querySelectorAll('[data-pose]')).find(button => button.dataset.pose === location.hash.slice(1));
@@ -447,17 +478,28 @@
       const ticket = ++sequence;
       if (card) {
         for (const item of cards) item.setAttribute('aria-pressed', String(card === item));
+        const imagePreview = gallery.querySelector('#primitive-image');
+        if (imagePreview) {
+          const showImage = card.hasAttribute('data-image');
+          imagePreview.hidden = !showImage;
+          demo.hidden = showImage;
+          gallery.querySelector('.media-links').hidden = showImage;
+          if (showImage) {
+            current?.remove();
+            current = null;
+            return;
+          }
+        }
         demo.dataset.primitiveScene = card.dataset.primitive;
         demo.dataset.footage = card.dataset.footage;
         demo.dataset.meshRevision = card.dataset.meshRevision || '';
         demo.dataset.frame = card.dataset.frame;
         cover.querySelector('img').src = card.querySelector('img').src;
-        demo.querySelector('.demo-heading strong').textContent = card.textContent;
-        demo.querySelector('.media-caption').textContent = card.dataset.caption;
         const source = gallery.querySelector('.media-links a');
         if (source && card.dataset.original) {
           source.href = card.dataset.original;
-          source.querySelector('span').textContent = card.textContent.split(' ·')[0] + ' footage · Pexels';
+          const title = card.querySelector('span').textContent.split(' ·')[0];
+          source.querySelector('span').textContent = source.hasAttribute('download') ? 'Download ' + title + ' footage' : title + ' footage · Pexels';
         }
       }
       current?.remove();
