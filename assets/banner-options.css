@@ -1,0 +1,161 @@
+/* Review-only presentation. Shared tokens come from landing.css. */
+.banner-review{background:#0b0b16}
+.review-page{max-inline-size:800px;margin-inline:auto;padding:32px 28px 45px}
+.review-heading{padding-block-end:26px;border-block-end:1px solid #39344d}
+.review-heading .tag{color:#ffc85a}
+.review-heading h1{font:600 27px/1.35 var(--heading);letter-spacing:-.04em;margin-block:7px 12px}
+.review-heading p{font-size:13px;max-inline-size:570px;color:#bdb8cd}
+.review-heading a{display:inline-block;margin-block-start:14px;font-size:12px;color:#d3c7ed}
+.design-study{padding-block-start:27px}
+.study-label{display:flex;align-items:baseline;gap:11px;margin-block-end:13px}
+.study-label h2{font:600 15px/1.4 var(--sans);letter-spacing:0}
+.study-label>span{font:500 10px/1.4 var(--mono);color:#c2b4e6;border:1px solid #51456b;border-radius:5px;padding:3px 7px}
+.study-label p{margin-inline-start:auto;font-size:10px;color:#a29bb5;text-align:end}
+.study-canvas{padding:0;background:radial-gradient(ellipse at 80% 40%,#15516b20,transparent 70%)}
+.study-canvas.hero{padding:0;text-align:start;overflow:visible;background:none}
+.study-canvas.hero::before{display:none}
+.study-canvas .launch-strip{margin:0}
+.study-description{margin-block-start:10px;font-size:11px;color:#aaa3bc;line-height:1.6}
+.review-footer{margin-block-start:35px;padding-block-start:22px;border-block-start:1px solid #39344d;font-size:13px;color:#d2c8e9}
+
+/* Temporary in-page review stack in v7. All options remain visible. */
+.banner-stack{display:grid;gap:26px;margin:-13px 0 30px;text-align:start}
+.banner-choice{min-inline-size:0;margin:0}
+.banner-stack .study-label{margin-block-end:10px}
+.banner-stack .study-label strong{font:600 13px/1.4 var(--sans);color:#e5ddf5}
+.banner-stack .launch-strip{margin:0}
+@media(max-width:600px){.banner-stack{margin-block-start:-8px;gap:22px}}
+
+/* All three alternatives share the same accessible offer and price content. */
+.offer-variant{
+  --gradient-space: ;
+  --offer-text:#f5f1ff;--offer-muted:#c6bedb;--offer-accent:#e4d4ff;--offer-divider:#b7a0de36;
+  position:relative;isolation:isolate;overflow:hidden;border-radius:18px;
+  color:var(--offer-text);border:1px solid #6b588a;
+}
+@supports(background:linear-gradient(90deg in oklab,white,black)){
+  .offer-variant{--gradient-space:in oklab}
+}
+.offer-variant :where(p,h3,dl,dd){margin:0}
+.offer-variant :where(.offer-kicker,.offer-duration){font:500 8px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--offer-accent)}
+.offer-variant .offer-title{font:600 24px/1.35 var(--heading);letter-spacing:-.04em;color:inherit;text-wrap:balance}
+.offer-variant .offer-description{font-size:12px;line-height:1.5;color:var(--offer-muted)}
+.offer-variant .offer-prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-block-start:13px;border-block-start:1px solid var(--offer-divider)}
+.offer-prices>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 7px;min-inline-size:0}
+.offer-prices dt{font:400 10px/1.5 var(--sans);color:var(--offer-muted)}
+.offer-prices dd{font:600 18px/1.25 var(--sans);letter-spacing:-.03em;color:var(--offer-accent);font-variant-numeric:tabular-nums}
+.offer-art{position:absolute;inset:0;pointer-events:none;z-index:-1;overflow:hidden;border-radius:inherit}
+.offer-value{font:700 80px/.95 var(--sans);letter-spacing:-.065em;color:inherit;white-space:nowrap}
+.offer-value .percent{font-size:.4em;letter-spacing:-.03em;vertical-align:top;line-height:1.3}
+.offer-value .off{display:block;font:600 11px/1.4 var(--mono);letter-spacing:.19em;text-align:center;margin-block-start:6px}
+
+/* B / Prism: an optical ring and cool metallic highlights. */
+.prism-offer{
+  display:grid;grid-template-columns:205px minmax(0,1fr);gap:16px 27px;padding:24px 27px 22px 20px;
+  background:radial-gradient(ellipse at 14% 45%,#53368755,transparent 49%),linear-gradient(110deg var(--gradient-space),#17112e,#131b32);
+  border-color:#9e87c980;box-shadow:0 8px 30px #02030c50,inset 0 1px #f5dfff1c;
+}
+.prism-offer .offer-art{background:radial-gradient(ellipse at 92% 0%,#71dbff1f,transparent 60%)}
+.prism-orb{position:relative;grid-row:1/3;display:grid;place-content:center;align-self:center;inline-size:205px;block-size:184px;text-align:center}
+.prism-orb::before{content:'';position:absolute;inset:3px 0;border-radius:50%;z-index:-1;
+  border:1px solid #cfb8ff6b;transform:rotate(-27deg) scaleY(.9);
+  background:radial-gradient(ellipse at center,#181629 55%,#cda8ff 57%,#9385ef 60%,#83eaff 62%,#3a3665 65%,#b08bfa 68%,transparent 71%);
+  box-shadow:0 0 24px #aa83ff3d,inset 0 0 18px #66e2ff55;
+}
+.prism-orb::after{content:'';position:absolute;inset:16px -8px;border:1px solid #8aafff57;border-radius:50%;transform:rotate(24deg) scaleY(.75);z-index:-1}
+.prism-orb .offer-value{font-size:70px;text-shadow:0 0 20px #b8bcff66}
+.prism-orb .off{color:#ded4ff;font-size:9px;letter-spacing:.25em;margin-block-start:7px}
+.prism-copy{align-self:center;padding-block:3px}
+.prism-copy .offer-kicker{display:flex;align-items:center;gap:8px;margin-block-end:10px;font-size:8px}
+.prism-copy .offer-kicker::before{content:'';inline-size:5px;block-size:5px;border-radius:50%;background:#b7f5ff;box-shadow:0 0 10px #b7f5ff}
+.prism-copy .offer-title{margin-block-end:9px}
+.prism-offer .offer-prices{grid-column:2}
+
+/* C / Signal: a graphic campaign poster, warm yellow against ink. */
+.signal-offer{
+  --offer-text:#21180d;--offer-muted:#55422c;--offer-accent:#21180d;--offer-divider:#4e381e38;
+  border-color:#ffe7a8;background:#ffd366;border-radius:7px;
+  box-shadow:0 4px 0 #ae7941,0 12px 30px #0004;
+}
+.signal-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 23px;border-block-end:1px solid var(--offer-divider)}
+.signal-top .offer-kicker{font-size:8px;font-weight:500}
+.signal-top .offer-duration{border:1px solid #5b421e88;padding:3px 6px;border-radius:2px;font-size:7px}
+.signal-middle{display:grid;grid-template-columns:minmax(0,1fr) 224px;align-items:center;gap:18px;padding:20px 23px 23px}
+.signal-copy .offer-title{font-weight:800;font-size:32px;line-height:1.1;text-transform:uppercase;letter-spacing:-.065em;margin-block-end:12px}
+.signal-copy .offer-description{font-size:11px}
+.signal-discount{position:relative;display:flex;justify-content:center;align-items:flex-start;gap:8px;padding-inline-end:3px}
+.signal-discount .offer-value{font:800 104px/.85 var(--sans);letter-spacing:-.07em}
+.signal-discount .discount-unit{display:grid;gap:4px;font:700 40px/.9 var(--sans);letter-spacing:-.04em;padding-block-start:4px}
+.discount-unit>span{font:700 18px/1 var(--sans);letter-spacing:0}
+.signal-discount::after{content:'';position:absolute;inset:auto 3px -13px 7px;block-size:5px;background:currentColor;transform:rotate(-3deg)}
+.signal-offer .offer-prices{--offer-accent:#ffe4a4;--offer-muted:#cbbfae;background:#231b17;color:#ffda85;border:0;padding:13px 23px;gap:24px}
+.signal-offer .offer-prices>div:not(:first-child){border-inline-start:1px solid #ffe2ab30;padding-inline-start:18px}
+.signal-offer .offer-art{background:repeating-linear-gradient(130deg,transparent 0 34px,#fff2 34px 35px);opacity:.4}
+
+/* D / Viewfinder: a compact camera instrument with an exposed scene grid. */
+.viewfinder-offer{
+  --offer-accent:#adf3ee;--offer-muted:#a9c6cb;--offer-divider:#83c8d32c;
+  padding:20px 24px 16px;border-color:#4d9da887;border-radius:11px;
+  background:radial-gradient(ellipse at 85% 44%,#20545b77,transparent 58%),#101e28;
+  box-shadow:inset 0 0 24px #040e1466,0 10px 35px #0004;
+}
+.viewfinder-offer .offer-art{background-image:linear-gradient(#9bd8db09 1px,transparent 1px),linear-gradient(90deg,#9bd8db09 1px,transparent 1px);background-size:24px 24px}
+.viewfinder-scene{position:absolute;right:0;bottom:-46px;inline-size:330px;block-size:240px;stroke:#75c3cb;opacity:.3;stroke-width:.7}
+.viewfinder-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-block-end:18px}
+.viewfinder-top .offer-kicker{display:flex;align-items:center;gap:6px;font-size:8px}
+.viewfinder-top .offer-kicker::before{content:'';inline-size:6px;block-size:6px;background:#ffc85a;border-radius:50%}
+.viewfinder-top .offer-duration{font-size:7px;color:#c0ccce}
+.viewfinder-main{display:grid;grid-template-columns:minmax(0,1fr) 155px;align-items:center;gap:35px;margin-block-end:22px}
+.viewfinder-copy .offer-title{font-size:24px;line-height:1.35;margin-block-end:9px}
+.viewfinder-discount{position:relative;padding:15px 12px 12px;text-align:center}
+.viewfinder-discount::before,.viewfinder-discount::after{content:'';position:absolute;inline-size:24px;block-size:24px;border-style:solid;border-color:#a9f2ea}
+.viewfinder-discount::before{left:0;top:0;border-width:2px 0 0 2px}
+.viewfinder-discount::after{right:0;bottom:0;border-width:0 2px 2px 0}
+.viewfinder-discount .offer-value{font-size:70px;color:#effffa}
+.viewfinder-discount .off{color:#a9f2ea;font-size:8px;letter-spacing:.15em}
+.viewfinder-offer .offer-prices{padding-block-start:12px;gap:20px}
+.viewfinder-offer .offer-prices>div{justify-content:space-between}
+
+@media(max-width:700px){
+  .prism-offer{grid-template-columns:165px minmax(0,1fr);gap:17px 24px;padding-inline:18px}
+  .prism-orb{inline-size:165px;block-size:165px}.prism-orb .offer-value{font-size:60px}
+  .prism-copy .offer-title{font-size:21px}
+  .signal-middle{grid-template-columns:minmax(0,1fr) 180px}
+  .signal-copy .offer-title{font-size:28px}.signal-discount .offer-value{font-size:92px}
+  .signal-discount .discount-unit{font-size:34px}
+  .viewfinder-main{gap:20px;grid-template-columns:minmax(0,1fr) 135px}
+  .viewfinder-copy .offer-title{font-size:22px}.viewfinder-discount .offer-value{font-size:62px}
+}
+@media(max-width:520px){
+  .review-page{padding:24px 15px 35px}.review-heading h1{font-size:24px}
+  .study-label{gap:8px}.study-label h2{font-size:14px}.study-label p{font-size:8px;max-inline-size:115px}
+  .prism-offer{grid-template-columns:114px minmax(0,1fr);gap:16px;padding:20px 16px 16px}
+  .prism-orb{grid-row:1;inline-size:114px;block-size:128px}.prism-orb .offer-value{font-size:44px}.prism-orb .off{font-size:7px}
+  .prism-copy .offer-kicker{font-size:6px;gap:5px}.prism-copy .offer-title{font-size:17px}.prism-copy .offer-description{font-size:10px}
+  .prism-offer .offer-prices{grid-column:1/-1}
+  .offer-variant .offer-prices{gap:10px}.offer-prices>div{display:block}.offer-prices dd{font-size:19px;margin-block-start:3px}.offer-prices dt{font-size:9px}
+  .signal-top{padding:11px 15px;gap:6px}.signal-top .offer-kicker{font-size:6px}.signal-top .offer-duration{font-size:5px;padding:3px 4px}
+  .signal-middle{padding:21px 15px 25px;grid-template-columns:minmax(0,1fr) 112px;gap:13px}
+  .signal-copy .offer-title{font-size:23px}.signal-copy .offer-description{font-size:10px}
+  .signal-discount{gap:5px}.signal-discount .offer-value{font-size:65px}.signal-discount .discount-unit{font-size:24px}.discount-unit>span{font-size:12px}
+  .signal-offer .offer-prices{padding:13px 15px;gap:10px}.signal-offer .offer-prices>div:not(:first-child){padding-inline-start:11px}
+  .viewfinder-offer{padding:16px}.viewfinder-top{margin-block-end:16px;gap:7px}
+  .viewfinder-top .offer-kicker{font-size:6px}.viewfinder-top .offer-duration{font-size:6px}
+  .viewfinder-main{grid-template-columns:minmax(0,1fr) 104px;gap:16px;margin-block-end:18px}
+  .viewfinder-copy .offer-title{font-size:18px}.viewfinder-copy .offer-description{font-size:10px}
+  .viewfinder-discount{padding:12px 6px}.viewfinder-discount .offer-value{font-size:49px}.viewfinder-discount .off{font-size:6px}
+  .viewfinder-scene{inline-size:230px;right:-35px}
+}
+@media(max-width:359px){
+  .prism-offer{grid-template-columns:96px minmax(0,1fr);gap:13px;padding-inline:13px}
+  .prism-orb{inline-size:96px;block-size:112px}.prism-orb .offer-value{font-size:38px}.prism-copy .offer-title{font-size:15px}
+  .signal-middle{grid-template-columns:minmax(0,1fr) 92px;gap:10px}.signal-copy .offer-title{font-size:20px}
+  .signal-discount .offer-value{font-size:54px}.signal-discount .discount-unit{font-size:20px}.discount-unit>span{font-size:10px}
+  .viewfinder-main{grid-template-columns:minmax(0,1fr) 88px;gap:13px}.viewfinder-copy .offer-title{font-size:16px}
+  .viewfinder-discount .offer-value{font-size:40px}.viewfinder-top .offer-duration{font-size:5px}
+}
+@media(forced-colors:active){
+  .offer-variant{border:1px solid CanvasText}.offer-art{display:none}
+  .prism-orb::before,.prism-orb::after{border:1px solid CanvasText;background:none;box-shadow:none}
+  .signal-offer .offer-prices{border-block-start:1px solid CanvasText}
+}

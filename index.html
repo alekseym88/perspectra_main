@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>Perspectra — One-click camera tracking for Blender</title>
+  <meta name="description" content="Solve camera motion in one click, refine drift, and track human motion in Blender. Try the original footage in your own tracker and compare the results.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/landing.css?v=3d06e992c1">
+  <link rel="stylesheet" href="assets/reference-surfaces.css?v=b5389a1c65">
+  <link rel="stylesheet" href="assets/hero-particles.css?v=tracking-points-2">
+  <script defer src="assets/manifest.js?v=64212efe89"></script>
+  <script defer src="assets/three-r160.min.js"></script>
+  <script defer src="assets/landing.js?v=deddcda04a"></script>
+  <script defer src="assets/ambient-shader.js?v=review-8"></script>
+  <script defer src="assets/hero-particles.js?v=orange-points-3"></script>
+  <script defer src="assets/photo-gallery/results.js?v=f960e662e9"></script>
+  <script defer src="assets/photo-gallery/viewer.js"></script>
+</head>
+<!-- Launch pricing runs through 27 November in Hong Kong. -->
+<body data-launch-offer="true">
+<main class="page">
+  <section class="hero section" aria-labelledby="hero-title">
+    <div class="hero-terrain" aria-hidden="true"><canvas width="900" height="560"></canvas></div>
+    <div class="launch-offer launch-only" id="banner-motion-variants">
+    <aside class="launch-promo" aria-label="Launch-week offer: 50 percent off" aria-describedby="launch-terms">
+      <canvas class="promo-particles" width="744" height="180" aria-hidden="true"></canvas>
+      <div class="offer-art" aria-hidden="true">
+        <svg class="promo-grid" viewBox="0 0 300 180" fill="none" focusable="false">
+          <g class="promo-grid-lines">
+            <path d="M150 0-120 180M150 0-30 180M150 0 60 180M150 0 150 180M150 0 240 180M150 0 330 180M150 0 420 180M114 24h72M78 48h144M33 78h234M-24 116h348M-96 164h492"/>
+          </g>
+          <g class="promo-track-path"><path d="m92 116 58-38 24-30 92 68"/></g>
+          <g class="promo-track-points">
+            <path d="M85 112v-3h3m8 0h3v3m0 8v3h-3m-8 0h-3v-3M143 74v-3h3m8 0h3v3m0 8v3h-3m-8 0h-3v-3M167 44v-3h3m8 0h3v3m0 8v3h-3m-8 0h-3v-3M259 112v-3h3m8 0h3v3m0 8v3h-3m-8 0h-3v-3"/>
+            <circle cx="92" cy="116" r="2"/><circle cx="150" cy="78" r="2"/><circle cx="174" cy="48" r="2"/><circle cx="266" cy="116" r="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="signal-middle">
+        <div class="signal-copy"><h2 class="offer-title">Track<br>your shot.</h2><small class="offer-limit">Limited-time offer</small></div>
+        <strong class="signal-discount"><span class="offer-value">50</span><span class="discount-unit">%<span>OFF</span></span>
+          <svg class="discount-accent" viewBox="0 0 240 38" fill="currentColor" aria-hidden="true" focusable="false"><path d="m16 20 169-13-10 18L7 33Zm182-14 29-2-10 18-28 2Z"/></svg>
+        </strong>
+      </div>
+    </aside>
+      <p class="launch-terms" id="launch-terms"><strong>50% off every edition.</strong><strong><time datetime="2026-11-27">Until Fri, 27 Nov.</time></strong></p>
+    </div>
+    <p class="eyebrow"><span class="tiny-square"></span> Camera tracking for Blender</p>
+    <h1 id="hero-title"><span>Solve the camera</span> <span>in one click.</span></h1>
+    <p class="hero-copy">Skip manual point placement. Press <strong>Track</strong> and Perspectra finds stable details, estimates the lens, and solves the camera move. Refine any drift right where it happens. With Pro, track a person into the same shot as an editable Blender rig.</p>
+    <div class="hero-facts"><div><svg class="line-icon" data-feature-icon="photo-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/></svg><b>Photo + video</b><span>One Blender workflow</span></div><div><svg class="line-icon" data-feature-icon="compute-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/></svg><b>Win · Mac · Linux</b><span>GPU or CPU.</span></div><div><svg class="line-icon" data-feature-icon="local-computer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4m-4-10 3 3 5-5"/></svg><b>Runs locally</b><span>No uploads</span></div><div><svg class="line-icon" data-feature-icon="lifetime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 12c-2-3-3-4-5-4a4 4 0 0 0 0 8c2 0 3-1 5-4s3-4 5-4a4 4 0 0 1 0 8c-2 0-3-1-5-4Z"/></svg><b>Pay once</b><span>Free 1.x updates</span></div></div>
+    
+    <div class="product-frame"><div class="hud-top"><span>● PERSPECTRA / MADE FOR BLENDER</span><span>PHOTO · VIDEO · 3D</span></div>
+    <div class="hero-video">
+      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+      <img class="hero-still" src="assets/old-town-returns.jpg" alt="Tracked landmarks on a street as a scooter passes"><strong class="preview-announcement">Full preview video coming soon on YouTube</strong></div>
+    <div class="hud-bottom"><span>BETTER CAMERA MATCHING</span><span>FULL CONTROL</span></div></div>
+    
+    <div class="workflow-options" id="workflow-options">
+      <div class="workflow-selected">
+      <ol class="workflow-route route-launch route-d" role="list" aria-label="Video tracking workflow"><li><span class="route-number" aria-hidden="true">01</span><span class="route-icon"><svg class="line-icon" data-feature-icon="choose-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg></span><div class="route-copy"><strong>Load your footage</strong><span>Bring in your footage.</span></div></li><li><span class="route-number" aria-hidden="true">02</span><span class="route-icon"><svg class="line-icon" data-feature-icon="automatic-track" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8V4h4m8 0h4v4M4 16v4h4m8 0h4v-4M8 12h8m-4-4v8"/><circle cx="12" cy="12" r="5"/></svg></span><div class="route-copy"><strong>Track automatically</strong><span>Solve the camera move.</span></div></li><li><span class="route-number" aria-hidden="true">03</span><span class="route-icon"><svg class="line-icon" data-feature-icon="inspect-fit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m14.5 14.5 6 6M7 10l2 2 4-4"/></svg></span><div class="route-copy"><strong>Check in Blender</strong><span>Inspect and refine the fit.</span></div></li><li><span class="route-number" aria-hidden="true">04</span><span class="route-icon"><svg class="line-icon" data-feature-icon="place-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v9l-9 5-9-5V8Zm-9 5 9 5 9-5m-9 5v9m-5-16 10 5"/></svg></span><div class="route-copy"><strong>Place a 3D object</strong><span>Build into the shot.</span></div></li></ol>
+    </div>
+    </div>
+  </section>
+
+  <section class="section paper why" aria-labelledby="why-title">
+    <p class="eyebrow">Why Perspectra</p>
+    <h2 id="why-title">Keep your 3D in place.</h2>
+    <p class="intro">A model can line up in the first frame and slide across the floor as the camera moves. Perspectra checks the fit across frames and gives you tools to correct the stretches where it slips.</p>
+    <div class="pains">
+      <article><span class="tag">CAMERA SOLVE</span><h3>Spend less time setting up the track.</h3><p>One click starts feature tracking, checks for zoom, and estimates the camera path. Use Fast for a quick first pass or Best for more lens checks on a difficult shot.</p></article>
+      <article><span class="tag">TRACK REPAIR</span><h3>Fix the frames that drift.</h3><p>Find the weak stretch on the health strip. Anchor a point, trace a pillar edge, or mark the floor, then refine that stretch and replay it against the footage.</p></article>
+      <article class="with"><span class="tag">WITH PERSPECTRA</span><h3>AI + real camera math</h3><p>Perspectra combines AI estimates of lens distortion, gravity, and depth with tracked points and edges. Its camera solver checks how well those details line up across frames and filters out unreliable matches. That gives the solve more to work with when a wide lens bends straight lines or a wall has few details to track.</p></article>
+    </div>
+  </section>
+
+<section class="section tracking-quality" aria-labelledby="quality-title">
+      <h2 id="quality-title">Camera tracking modes</h2>
+      <p><strong>Perspectra defaults to Normal.</strong> All three modes run automatically and include the same manual repair tools in Standard and Pro.</p>
+      <dl class="mode-guide">
+        <div class="mode-fast"><dt><i class="trace fast" aria-hidden="true"></i>Fast</dt><dd>Try a few seconds of footage before tracking the full clip.</dd></div>
+        <div class="mode-normal"><dt><i class="trace normal" aria-hidden="true"></i>Normal</dt><dd>A balanced starting point with more analysis than Fast.</dd></div>
+        <div class="mode-best"><dt><i class="trace best" aria-hidden="true"></i>Best</dt><dd>More AI keyframes and lens checks. Allow more processing time.</dd></div>
+      </dl>
+    </section>
+
+  <section class="section gallery-section" aria-labelledby="gallery-title">
+    <div class="section-label"><span>TRY IT NOW</span><span>01 / INTERACTIVE CAMERA TRACKING</span></div>
+    <h2 id="gallery-title">Explore the results.</h2>
+    <p class="intro">Explore a tracked clip in a Blender-style 3D scene. Use <strong>Camera</strong> view to see the track over the footage, switch to <strong>Overview</strong> to explore the camera path, and place a <strong>test cube</strong> to check how steadily it stays in the shot.</p>
+    <p class="gallery-note"><span aria-hidden="true">✦</span> The ring follows a feature in the footage. Play or scrub to check the cube corner against it.</p>
+
+    <div class="clip-catalog" id="clip-choices" role="group" aria-label="Choose a camera-tracking example"><div class="thumbnails landscape-clips" id="landscape-clips" role="group" aria-label="Landscape clips"></div><div class="thumbnails portrait-clips" id="portrait-clips" role="group" aria-label="Portrait clips"></div></div>
+    <div id="tracking-gallery" class="demo-shell">
+      <header class="clip-summary">
+        <div><strong id="clip-title">Empty parking</strong><span id="clip-detail">Tracking preview pending · 8.3s source · 30 fps</span></div>
+    <div class="gallery-context" aria-labelledby="gallery-context-title" hidden>
+      <h3 id="gallery-context-title"></h3>
+      <p id="clip-inspect"></p>
+    </div></header>
+      <div class="gallery-stage" id="automatic-stage"><div class="demo-cover" id="automatic-cover"><img id="clip-poster" src="assets/clip28-poster.webp" alt="Empty parking source footage" width="1100" height="580" loading="lazy"><button class="play-launch" id="launch-automatic" disabled><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Tracking preview pending</span></button></div><div id="automatic-viewer"></div></div>
+      <p class="demo-message" id="automatic-message" role="status" hidden></p>
+
+    </div>
+
+    <div class="gallery-compare">
+      <p><strong>Already use another tracker?</strong> Try the original footage in it and compare how steadily a cube holds on the same spot.</p>
+      <div class="media-links"><a id="clip-original" href="assets/originals/28.mp4" download="28.mp4" aria-label="Download original video for Empty parking"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3h7v7m0-7L10 14m0-9H4v16h16v-6"/></svg><span>Download original video</span></a></div>
+    </div>
+    <noscript><p class="notice">Enable JavaScript to choose clips and inspect the interactive tracking data. All feature descriptions and plan details remain available below.</p></noscript>
+  </section>
+
+  <section class="section automatic paper" aria-labelledby="auto-title">
+    <div class="section-label"><span>STANDARD + PRO</span><span>02 / VIDEO CAMERA MATCHING</span></div>
+    <h2 id="auto-title">One button to track.<br>Control through the shot.</h2>
+    <p class="intro">Load your footage and press <strong>Track</strong>. Perspectra runs the analysis automatically—no manual point selection or camera-mode setup required. It checks the solve and attempts to recover weak tracking before you review the result.</p>
+    <div class="cap"><div><span class="tag">MOVING OBJECT FILTER</span><h3 id="old-town-returns">Find the pavement again.</h3><p>The scooter briefly hides details in the street. Perspectra filters moving objects out of the camera solve and checks the exposed pavement against its earlier appearance. Follow the colored IDs as the same features return.</p></div>
+      <figure><video class="feature-video" controls muted playsinline loop preload="none" width="960" height="540" poster="assets/old-town-returns.jpg?v=57cecd2d29" src="assets/old-town-returns.mp4?v=2049763249" aria-label="Pavement landmark IDs before, during and after the scooter passes"></video><figcaption>Old town · Fast tracking mode.</figcaption></figure>
+    </div>
+    <div class="cap reverse"><div><span class="tag">LANDMARK MATCHING</span><h3 id="forest-landmarks">Recognize the same forest detail twice.</h3><p>Three forest-floor details are first tracked on frame 1 and picked up again on frames 49, 57, and 65. Each arrow leads from a drifting estimate in red to its merged position in green. The second comparison follows landmarks #9102, #9162, and #9666. Both views pause together on frame 37, then play in sync. Red dots show the original projections. The green rings show positions fitted to image matches through frame 157. Beyond that frame the rings are dashed. At frame 274, the walker covers the estimated locations.</p></div>
+      <figure><video class="feature-video" controls muted playsinline loop preload="none" width="960" height="540" poster="assets/forest-long-match.jpg?v=8282e2cfd3" src="assets/forest-long-match.mp4?v=1231821c1b" aria-label="Forest landmark merging followed by a synchronized replay of the original three landmarks, with dashed rings for estimated locations after frame 157"></video><figcaption>Forest walk · Normal tracking mode · frames 1–171, then 37–293 · 15.3 seconds.</figcaption></figure>
+    </div>
+    <div class="cap"><div><span class="tag">CAMERA SMOOTHING</span><h3 id="forest-focus">Steady a point in the workshop.</h3><p>Watch the top edge of the cabinet behind the machine. The white ring follows the edge in the footage. The gold cross and its trail show where the camera places that point. On this early camera estimate, 85% position and rotation smoothing cuts frame-to-frame jitter by 8.9×. Both close-ups use the same 12× magnification.</p></div>
+      <figure><video class="feature-video" controls muted playsinline preload="none" width="960" height="540" poster="assets/workshop-smoothing.jpg?v=d0fecb643e" src="assets/workshop-smoothing.mp4?v=35fd6fd6e1" aria-label="Workshop cabinet corner with smoothing off and on, with a footage reference and jitter traces at the same scale"></video><figcaption>Workshop · Normal estimate before bundle adjustment · frames 19–51 with a slow-motion replay.</figcaption></figure>
+    </div>
+    <div class="cap reverse"><div><span class="tag">EDITABLE IGNORE MASKS</span><h3 id="parcel-mask">Follow the parcel through the shot.</h3><p>A moving box can pull the camera solve away from the doorway. Mark the box for exclusion and follow its visible outline as the worker turns. The grid follows the front face so you can check the mask against its edges.</p></div>
+      <figure><video class="feature-video" controls muted playsinline loop preload="none" width="960" height="540" loading="lazy" poster="assets/feature-parcel.jpg" aria-label="Follow the parcel through the shot."><source src="assets/feature-parcel.webm" type="video/webm"><source src="assets/feature-packages-mask.mp4" type="video/mp4"></video><figcaption>Delivery · the green mask covers the visible box as the hand moves across it.</figcaption></figure>
+    </div>
+    <div class="cap"><div><span class="tag">PAN AND ZOOM</span><h3>Check the camera turn against the street.</h3><p>As the camera follows the tram, its turn and zoom leave little parallax to judge depth. In the tracking gallery, choose Tram and switch to Overview to inspect the camera path. Return to Camera view and scrub to see whether the track holds against the building edges.</p></div>
+      <figure><video class="feature-video" controls muted playsinline preload="none" width="1080" height="1920" poster="assets/clip16740468-poster.webp" src="assets/full/clip16740468/source.mp4" aria-label="Camera panning and zooming as a tram passes"></video><figcaption>Tram · source footage.</figcaption></figure>
+    </div>
+    <section class="comparison-feature" aria-labelledby="rig-title" data-comparison="rig" data-footage="full/sports_car/source.mp4" data-poster="sports_car-poster.webp">
+      <h3 id="rig-title">Separate the camera move from the car.</h3><p>The camera turns inside the cabin while the car moves across the garage. Inspect the camera in car coordinates, then switch to the ground view to see how the two motions combine.</p>
+      <div class="demo-shell"><fieldset class="comparison-controls motion-cards"><legend>Compare motion</legend>
+          <label><input type="radio" name="rig-variant" value="cabin" checked><strong>Camera relative to car</strong><small>Follow the turn inside the cabin.</small></label>
+          <label><input type="radio" name="rig-variant" value="ground"><strong>Camera relative to ground</strong><small>Include the car’s movement through the garage.</small></label>
+        </fieldset>
+        <div class="comparison-stage"><div class="demo-cover"><img loading="lazy" width="960" height="540" src="assets/sports_car-poster.webp" alt=""><button class="play-launch" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button></div><div class="comparison-viewer"></div></div>
+        <p class="demo-message" role="status" hidden></p></div><p class="footnote">The angle shows how far the camera has turned since frame 1. The cabin view follows Perspectra_VideoCamera. The ground view follows Perspectra_OnboardCamera, with the platform path in teal. Orange points move with the cabin. Blue points belong to the garage.</p>
+    </section>
+    <section class="comparison-feature camera-study-gallery" aria-labelledby="still-camera-title">
+      <h3 id="still-camera-title">Inspect a tabletop camera match.</h3>
+      <p>Start with a locked-off bottle shot, then compare two camera tracks. Use Camera view to check the footage and Orbit to inspect the scene in depth.</p>
+      <div class="thumbnails camera-study-cards" role="group" aria-label="Choose a tabletop camera track">
+        <button type="button" data-primitive="bottle" data-mesh-revision="dbc4312e02" data-footage="bottle" data-frame="1" data-caption="A 79.1 mm camera stays fixed while the reeds move. The dots show verified landmarks around the fitted cylinder." aria-pressed="true"><img loading="lazy" src="assets/full/bottle/poster.webp" alt=""><span>Diffuser bottle</span></button>
+        <button type="button" data-primitive="ceramics" data-footage="ceramics" data-frame="1" data-caption="Follow the tracked details on the textured clay as the framing shifts." aria-pressed="false"><img loading="lazy" src="assets/full/ceramics/poster.webp" alt=""><span>Ceramic teapots</span></button>
+        <button type="button" data-primitive="glassware" data-mesh-revision="edfaf47248" data-footage="glassware" data-frame="1" data-caption="Perspectra fits a cylinder to each selected object using its mask and estimated depth. In Camera view, open Overlay options and toggle Mesh to compare the three cylinders with the footage." aria-pressed="false"><img loading="lazy" src="assets/full/glassware/poster.webp" alt=""><span>Glass and books</span></button>
+      </div>
+      <div class="demo-shell" data-primitive-scene="bottle" data-mesh-revision="dbc4312e02" data-footage="bottle" data-frame="1" >
+      <div class="demo-heading"><strong>Diffuser bottle · stationary camera</strong></div>
+      <div class="comparison-stage"><div class="demo-cover"><img loading="lazy" width="960" height="540" src="assets/full/bottle/poster.webp" alt=""><button class="play-launch" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button></div><div class="comparison-viewer"></div></div>
+      <p class="demo-message" role="status" hidden></p><p class="media-caption">The outline follows the bottle. Orange dots mark background landmarks verified against the footage.</p></div>
+    </section>
+    <div class="feature-list two-col tracking-features">
+      <article><span class="feature-icon"><svg class="line-icon" data-feature-icon="full-clip-range" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8V5h5m8 0h5v3M3 16v3h5m8 0h5v-3M5 12h14m-3-3 3 3-3 3"/></svg></span><div><h3>Track the full video</h3><p>No fixed clip-length limit. Track a full video or a selected frame range. Long clips are processed in overlapping sections, keeping memory use manageable. Processing time and storage grow with the clip.</p></div></article>
+      <article><span class="feature-icon"><svg class="line-icon" data-feature-icon="recover-tracks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7V3h4m10 0h4v4M3 17v4h4m10 0h4v-4M6 15c3-8 5 3 12-6"/><circle cx="6" cy="15" r="1.5"/><circle cx="18" cy="9" r="1.5"/></svg></span><div><h3>Recover more of the track</h3><p>Filters inconsistent matches, searches for briefly lost points, and attempts to repair short camera jumps. The health strip highlights stretches that still need your attention.</p></div></article>
+      <article><span class="feature-icon"><svg class="line-icon" data-feature-icon="film-cuts" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m6-16v16M3 9h6m6 6h6"/></svg></span><div><h3>Detect cuts automatically</h3><p>Edited footage is split at detected cuts and each shot is solved separately, so a new viewpoint gets its own camera analysis.</p></div></article>
+      <article><span class="feature-icon"><svg class="line-icon" data-feature-icon="scene-origin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 16 9 5 9-5-9-5Zm9 0V3m0 13 7-4m-7 4-6-3M10 5l2-2 2 2"/><circle cx="12" cy="16" r="1"/></svg></span><div><h3>Start in a usable Blender scene</h3><p>The camera, footage, frame rate, and resolution are set up together. Start with estimated floor and scale, calibrate to a known size, then place your 3D.</p></div></article>
+    </div>
+
+
+  </section>
+
+  <section class="section repair" aria-labelledby="repair-title">
+    <div class="section-label"><span>STANDARD + PRO</span><span>03 / THE CONTROL TO FINISH</span></div>
+    <h2 id="repair-title">When the track drifts,<br><span class="accent">take control.</span></h2>
+    <p class="intro">Scrub the health strip to find a jump or a stretch of drift. If the automatic tracker misses a useful feature or follows a moving object, give the solve a fixed reference of your own.</p>
+    <div class="demo-shell manual-demo"><div class="demo-heading"><div><strong>Graffiti · tracking repair</strong><span>Compare the Fast camera path in teal with the repaired path in orange in Overview. Both start at the same camera pose and use a common travel scale.</span></div><span class="micro-label">INTERACTIVE</span></div><div class="manual-stage"><div class="demo-cover" id="manual-cover"><img src="assets/repair-references.webp" alt="The Garage shot with tracking points, edge references, and tracked surfaces" width="1100" height="580" loading="lazy"><button class="play-launch" id="launch-manual"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button></div><div id="manual-viewer"></div></div><p id="manual-message" class="demo-message" role="status" hidden></p><div class="demo-instructions"><span>Find a weak range on the <strong>health strip</strong></span><span>Toggle <strong>Points / Edges / Surfaces</strong> to inspect the repair</span></div></div>
+    <p class="footnote">Use the three tools below to add evidence in Blender. After refining the range, replay the same frames and check the pillar against its edges.</p><div class="media-links"><a target="_blank" rel="noopener" href="https://videos.pexels.com/video-files/7121125/7121125-uhd_4096_2160_25fps.mp4"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3h7v7m0-7L10 14m0-9H4v16h16v-6"/></svg><span>Get Garage footage · Pexels</span></a></div>
+    <div class="tracking-guides">
+      <article><span class="guide-icon"><svg class="line-icon" data-feature-icon="point-anchor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="12" r="3"/><path d="M12 7v2m0 6v2m-5-5h2m6 0h2"/></svg></span><h3>Point tracking</h3><p>Choose a bolt or corner that stays visible. Follow it through the weak range and check the point against the footage.</p></article>
+      <article><span class="guide-icon"><svg class="line-icon" data-feature-icon="edge-follow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 18 14-12"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M3 8V3h5m8 18h5v-5"/></svg></span><h3>Edge tracking</h3><p>Trace a pillar or door frame when its corners disappear. Replay the turn and check the projected line against that edge.</p></article>
+      <article><span class="guide-icon"><svg class="line-icon" data-feature-icon="surface-track" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 17 7-12 9 14Z"/><circle cx="4" cy="17" r="1.5"/><circle cx="11" cy="5" r="1.5"/><circle cx="20" cy="19" r="1.5"/></svg></span><h3>Surface tracking</h3><p>Mark a flat patch on the floor or wall. Refine the range, then check that fixed geometry stays on the patch.</p></article>
+    </div>
+    <section class="comparison-feature" aria-labelledby="bridge-title" data-comparison="bridge" data-footage="feature-bridge.mp4" data-poster="feature-bridge.webp">
+      <h3 id="bridge-title">Bridge the gap at the second pillar.</h3><p>Fire and a passing person hide the marks on the pillar. Bridge Frames uses the camera motion on either side and the references still visible inside the range. Switch views at the same frame and watch the cloud and pillar outlines against the footage.</p>
+      <div class="demo-shell"><fieldset class="comparison-controls motion-cards"><legend>Compare motion</legend><label><input type="radio" name="bridge-variant" value="before" checked><strong>Before bridge</strong><small>Inspect the original camera path.</small></label><label><input type="radio" name="bridge-variant" value="after"><strong>After bridge</strong><small>See the repaired motion through the gap.</small></label></fieldset>
+        <div class="comparison-stage"><div class="demo-cover"><img loading="lazy" width="960" height="540" src="assets/feature-bridge.webp" alt=""><button class="play-launch" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button></div><div class="comparison-viewer"></div></div>
+        <p class="demo-message" role="status" hidden></p></div><p class="footnote">Garage · frames 795–1005. Orange dots show projected 3D points. The saved bridges smooth the camera through frames 817–914 and 960–980. Watch the pillar outlines as the camera crosses the gap.</p>
+    </section>
+    <div class="direct-control media-feature">
+      <div><span class="tag">DIRECT CONTROL</span><h3>Match the camera to your block.</h3><p>With <b>Match Block to Footage</b>, drag projected corners and edges onto the shot. The block stays fixed while the camera changes, with a correction fade into nearby frames.</p></div>
+      <figure class="planned-media">
+        <!-- Replace this placeholder with the block-matching recording when it is supplied, and link to the original recording beneath the caption. -->
+        <div class="video-placeholder" data-media-placeholder="block-matching"><span class="placeholder-icon" aria-hidden="true"><svg class="line-icon" data-feature-icon="block-alignment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8V3h5m8 0h5v5M3 16v5h5m8 0h5v-5M7 8l9-2 2 10-10 2Z"/><path d="M7 8l5 4 6 4m-6-4 4-6m-4 6-4 6"/></svg></span><strong>See the camera correction in action</strong><span>Video / GIF preview coming soon</span></div>
+        <figcaption>Align the block’s corners, then replay the corrected range to see how the geometry holds.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section pro-feature" aria-labelledby="human-title">
+    <div class="section-label"><span class="pro-label">PRO</span><span class="beta-tag">Beta</span><span>04 / HUMAN MOTION</span></div>
+    <h2 id="human-title">Track a person.<br>Edit the motion in Blender.</h2>
+    <p class="intro">Human tracking ships in Pro beta. Choose a person in the footage, fit an editable skeleton through the matched camera, and adjust the poses in Blender. Finger and toe tracking <small class="photo-beta">Beta</small> can miss small movements. See the <a href="#roadmap">Pro roadmap</a> for upcoming work.</p>
+    <div id="preview-pose-8688810" class="pose-gallery">
+      <div class="clip-catalog pose-catalog">
+        <div class="thumbnails pose-rail" role="group" aria-label="Human motion clips">
+          <button type="button" data-pose="pose-8688810" aria-pressed="true"><img loading="lazy" src="assets/full/pose-8688810/poster.webp?v=c72eb4de40cc" alt=""><span>Two dancers</span><small>Frames 1–274</small></button>
+          <button type="button" data-pose="pose-6868294" aria-pressed="false"><img loading="lazy" src="assets/full/pose-6868294/poster.webp?v=eb1dc9d191b3" alt=""><span>Headphone dance</span><small>Frames 1–233</small></button>
+          <button type="button" data-pose="pose-8721779" aria-pressed="false"><img loading="lazy" src="assets/full/pose-8721779/poster.webp?v=8568bcabc258" alt=""><span>Walking indoors</span><small>Frames 1–396</small></button>
+          <button type="button" data-pose="pose-21827" aria-pressed="false"><img loading="lazy" src="assets/full/pose-21827/poster.webp?v=9be4a050a8f3" alt=""><span>One-hand balance</span><small>Frames 1–176</small></button>
+          <button type="button" data-pose="pose-skater" aria-pressed="false"><img loading="lazy" src="assets/full/pose-skater/poster.webp?v=e2cf8346f38e" alt=""><span>Skatepark</span><small>Frames 1–371</small></button>
+        </div>
+      </div>
+      <div class="demo-shell">
+        <div class="demo-heading"><strong id="pose-title">Two dancers</strong><span>Animated bodies</span></div>
+        <template id="pose-controls-template"><fieldset class="pose-display"><legend class="sr-only">Display</legend><span aria-hidden="true">Display</span><label for="model-anny"><input type="radio" id="model-anny" name="pose-model" value="anny" checked><strong>ANNY</strong></label><label for="model-mixamo"><input type="radio" id="model-mixamo" name="pose-model" value="mixamo"><strong><span>Maximo</span></strong></label><label for="model-bones"><input type="radio" id="model-bones" name="pose-model" value="bones"><strong>Bones</strong></label></fieldset></template>
+        <div class="comparison-stage"><div class="demo-cover"><img src="assets/pose-overview.webp?v=5f55c81c0e" width="1107" height="651" loading="lazy" alt=""><button type="button" class="play-launch"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Capture motion</span></button></div><div class="comparison-viewer"></div></div>
+        <p class="demo-message" role="status" hidden></p>
+      </div>
+      <p class="footnote">Switch between ANNY, Maximo, and the tracked bones at the same frame. Drag to orbit, or use Camera view to compare the wrists and fingers with the footage.</p>
+    </div>
+    <div class="human-features human-media-features">
+      <article class="human-feature-reverse"><div class="human-feature-copy"><span class="feature-number">01 / COMPLETE</span><h3>Fill hidden motion <small class="photo-beta">Beta</small></h3><p>Enable motion completion when a limb leaves the frame or passes behind an object. The MotionBricks hybrid approach uses the visible poses to guide an estimate of the missing movement. Review the transition in Blender and adjust it by hand. We’re refining completion with each release.</p></div></article>
+      <article><div class="human-feature-copy"><span class="feature-number">02 / REFINE</span><h3>Edit a pose. Adjust the motion. <small class="photo-beta">Beta</small></h3><p>Move or rotate joints, keep the correction, and choose its spread across nearby frames. The animation blends your edit into the tracked performance.</p></div>
+        <figure class="human-demo-slot"><div class="feature-media-placeholder" data-media-placeholder="human-pose-edit"><span class="media-frame-icon" aria-hidden="true"><svg class="line-icon" data-feature-icon="pose-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="10" cy="13" r="2"/><path d="m6 7 3 4m-1 4-4 5m8-6 7-7 3 3-7 7-4 1Z"/></svg></span><strong>Pose edit → animation update</strong><span>GIF / video recording coming soon</span></div></figure></article>
+      <article><div class="human-feature-copy"><span class="feature-number">03 / FOOT CONTACT</span><h3>Correct a sliding foot</h3><p>Scrub to the frame where the foot meets the floor. Use the footage to place the foot, then play through the planted frames to check that it stays in place until the next step.</p></div></article>
+      <article><div class="human-feature-copy"><span class="feature-number">04 / RETARGET</span><h3>Transfer the performance to your character</h3><p>Preview the capture on the included ANNY or Mixamo rig. To use your own compatible FK rig, check which bones drive each joint, adjust the mapping in Blender, and transfer the motion.</p></div></article>
+    </div>
+  </section>
+
+  <section class="section pro-feature primitive-feature paper" aria-labelledby="primitive-title">
+    <div class="section-label"><span class="pro-label">PRO</span><span>05 / FITTED PRIMITIVES</span></div>
+    <h2 id="primitive-title">Simple shapes.<br>A scene your 3D can interact with.</h2>
+    <p class="intro">Turn a selected subject into a box, cylinder, sphere, or plane that fits the footage. Use this editable scene geometry to integrate new objects—or render a simplified reference for generative video.</p>
+    <div class="clip-catalog"><div class="thumbnails landscape-clips" role="group" aria-label="Choose fitted primitives">
+        <button type="button" id="preview-pillar" data-primitive="pillar" data-footage="garage" data-frame="601" data-caption="Orbit to see how the pillars meet the floor, or scrub in Camera view to check their edges." data-original="https://videos.pexels.com/video-files/7121125/7121125-uhd_4096_2160_25fps.mp4" aria-pressed="true"><img loading="lazy" src="assets/geometry-poster.webp" alt=""><span>Garage · pillar and floor</span></button>
+        <button type="button" id="preview-boxes" data-primitive="boxes" data-mesh-revision="280cecd628" data-footage="boxes" data-frame="1" data-caption="The camera moves through 15 fixed carton meshes. Scrub to compare their visible edges with the footage. Hidden corners are estimated." data-original="https://videos.pexels.com/video-files/4553292/4553292-uhd_4096_2160_25fps.mp4" aria-pressed="false"><img loading="lazy" src="assets/full/boxes/poster.webp" alt=""><span>Stacked cartons</span></button>
+        <button type="button" id="preview-bottle" data-primitive="bottle" data-mesh-revision="dbc4312e02" data-footage="bottle" data-frame="1" data-caption="Compare the cylinder rim and base with the bottle, then orbit to see the fit in depth." data-original="https://videos.pexels.com/video-files/6608007/6608007-uhd_2160_4096_30fps.mp4" aria-pressed="false"><img loading="lazy" src="assets/full/bottle/poster.webp" alt=""><span>Diffuser bottle</span></button>
+    </div></div>
+    <div class="demo-shell" data-primitive-scene="pillar" data-footage="garage" data-frame="601">
+      <div class="demo-heading"><strong>Garage · pillar and floor</strong></div>
+      <div class="comparison-stage"><div class="demo-cover"><img loading="lazy" width="960" height="540" src="assets/geometry-poster.webp" alt=""><button class="play-launch" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button></div><div class="comparison-viewer"></div></div>
+      <p class="demo-message" role="status" hidden></p><p class="media-caption">Orbit to see how the pillars meet the floor, or scrub in Camera view to check their edges.</p></div>
+    <div class="media-links"><a target="_blank" rel="noopener" href="https://videos.pexels.com/video-files/7121125/7121125-uhd_4096_2160_25fps.mp4"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3h7v7m0-7L10 14m0-9H4v16h16v-6"/></svg><span>Get Garage footage · Pexels</span></a></div>
+    <aside class="primitive-ideas" aria-labelledby="primitive-ideas-title">
+      <div class="ideas-heading"><span class="idea-spark" aria-hidden="true"><svg class="line-icon" data-feature-icon="shot-ideas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 15a6 6 0 1 1 8 0l-1 3H9Zm1 6h6m-3-8v5"/></svg></span><div><span class="tag">IDEAS FOR YOUR NEXT SHOT</span><h3 id="primitive-ideas-title">A simple scene goes a long way.</h3><p>A few ways to use the geometry after fitting it.</p></div></div>
+      <ul class="ideas-list" role="list">
+        <li><span class="idea-icon" aria-hidden="true"><svg class="line-icon" data-feature-icon="shadow-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="6" r="3"/><path d="M8 1V0M3 6H1m12 0h2M4 2 3 1m9 1 1-1M9 21h12l-5-5H9Zm0 0v-8l7 3m-4-6 2 2"/></svg></span><div><strong>Ground your CG with light and shadows</strong><p>Use a fitted floor, table, or pillar to receive shadows from added objects. Set up the lighting and materials in Blender.</p></div></li>
+        <li><span class="idea-icon" aria-hidden="true"><svg class="line-icon" data-feature-icon="occlusion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="8" width="11" height="12" rx="1"/><path d="M9 5V3h12v12h-4"/><path d="M14 15H9V8" stroke-dasharray="2 2"/></svg></span><div><strong>Let real objects hide your CG</strong><p>Use the shapes as occluders so an added object passes behind a real box or pillar.</p></div></li>
+        <li><span class="idea-icon" aria-hidden="true"><svg class="line-icon" data-feature-icon="generative-reference" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="4" width="12" height="16" rx="1"/><path d="m5 16 3-4 3 2m5-7h6m-3-3 3 3-3 3m-2 7h5m-2-3v6"/></svg></span><div><strong>Make a reference for generative video</strong><p>Render depth, normals, or silhouettes from the simplified scene for AI-video workflows that accept reference passes.</p></div></li>
+      </ul>
+    </aside>
+    <p class="footnote">The shapes stay editable. Refine the subject mask, check the outline across frames, and adjust the geometry to suit your shot.</p>
+  </section>
+
+  <section class="section pro-feature mesh-feature" aria-labelledby="mesh-title"><div class="section-label"><span class="pro-label">PRO</span><span>06 / RECONSTRUCTED MESHES</span></div><h2 id="mesh-title">Beyond a simple shape.<br>Reconstruct the surface.</h2><p class="intro">Use multiple views to build a more detailed mesh and project texture from the footage. A phone recording can become a useful scene asset when the subject and camera coverage cooperate.</p><div class="scan-gallery">
+      <div class="clip-catalog"><div class="thumbnails scan-clips" role="group" aria-label="Choose a reconstructed object">
+        <button type="button" data-scan="sneaker" data-original="originals/sneaker_360.mp4" data-source="sneaker-source.mp4" aria-pressed="true"><img loading="lazy" src="assets/sneaker-poster.webp" alt=""><span>Sneaker</span></button>
+        <button type="button" data-scan="orange" data-original="originals/10239994-uhd_3840_2160_24fps.mp4" data-source="scans/orange/source.mp4" aria-pressed="false"><img loading="lazy" src="assets/scans/orange/poster.webp" alt=""><span>Mandarin</span></button>
+      </div></div>
+      <div class="demo-shell"><div class="demo-heading"><strong>Sneaker</strong></div>
+        <fieldset class="comparison-controls motion-cards"><legend>View</legend><label><input type="radio" name="scan-view" value="mesh" checked><strong>Textured mesh</strong><small>Orbit the reconstructed surface.</small></label><label><input type="radio" name="scan-view" value="source"><strong>Source footage</strong><small>Play the clip used for reconstruction.</small></label></fieldset>
+        <div class="scan-stage"><img class="scan-cover" loading="lazy" src="assets/sneaker-poster.webp" alt="Sneaker on the turntable"><canvas tabindex="0" aria-label="Orbit the reconstructed object" hidden></canvas>
+          <video controls muted playsinline loop preload="none" hidden></video>
+          <button type="button" class="play-launch"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button>
+        </div><div class="scan-caption"><span role="status">Inspect the textured surface from any angle.</span><button type="button" data-reset hidden>Reset view</button></div>
+      </div>
+      <div class="media-links"><a href="assets/originals/sneaker_360.mp4" target="_blank" rel="noopener" download>Download original sneaker video</a></div>
+    </div><div class="three-notes"><article><h3>Follow the subject</h3><p>Collect usable outlines and scene evidence across the clip.</p></article><article><h3>Build + texture</h3><p>Perspectra uses a raised detail visible from several angles, such as the mandarin stem, to refine the mesh and align the texture around it.</p></article><article><h3>Inspect the coverage</h3><p>Unseen surfaces, thin parts, and reflections can leave incomplete or approximate geometry.</p></article></div></section>
+
+  <section class="section paper photo" aria-labelledby="photo-title">
+    <div class="section-label"><span>PHOTO MATCHING IN EVERY EDITION</span><span>07 / A SINGLE IMAGE</span></div>
+    <h2 id="photo-title">Match a photo.<br>Strengthen a video solve.</h2>
+    <p class="intro">Recover a camera from one image using lens, gravity, scene-edge, and depth estimates. The same photo-matching methods also analyse selected video frames to help estimate and refine the video camera’s lens and orientation.</p>
+    <section id="photo-results" aria-labelledby="photo-results-title">
+      <h3 id="photo-results-title">Explore the photo matches</h3>
+      <div class="photo-picks" aria-label="Photo examples" role="group"></div>
+      <div class="photo-scene"></div>
+    </section>
+    <div class="photo-copy two-col"><div><h3>Use the evidence you have</h3><p>Weighted edges contribute alongside the lens and depth estimates. Refine with guide lines or a lens override when the automatic interpretation needs help.</p></div><div><h3>Give the scene a useful scale</h3><p>Start with estimated floor and metric scale. A reference with a known dimension calibrates the scene; an unknown photo cannot guarantee exact measurements.</p></div></div>
+    <aside class="photo-tip" aria-label="Photo matching tip"><span class="photo-tip-icon" aria-hidden="true"><svg class="line-icon" data-feature-icon="image-detail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M8 12h8m-4-4v8"/><circle cx="12" cy="12" r="2"/></svg></span><p><strong>For a better photo match:</strong> use a sharp, full-resolution original and <strong>Best</strong> quality for more detailed analysis. Check the alignment, then adjust the guides or lens if needed.</p></aside>
+    <div class="lens-demo"><div><h3>Fisheye? Bring it into perspective.</h3><p>Compare the original lens view with the corrected camera match. Drag across the image, or focus it and use the arrow keys.</p></div><figure class="before-after" style="--split:50%"><div class="comparison-image"><img src="assets/fisheye-corrected.webp" alt="Kitchen photo with lens distortion corrected" width="736" height="736" loading="lazy"><img class="before-layer" src="assets/fisheye-original.webp" alt="Original kitchen photo with fisheye distortion" width="736" height="736" loading="lazy"><span class="before-label">Original</span><span class="after-label">Corrected</span><span class="image-divider" aria-hidden="true"><b>↔</b></span><label class="sr-only" for="fisheye-slider">Compare original and corrected lens view</label><input class="image-range" id="fisheye-slider" type="range" min="0" max="100" step="1" value="50" aria-valuetext="50% original image visible"></div></figure></div>
+    <div class="photo-reconstruction media-feature">
+      <div><span class="badge">STANDARD + PRO</span><h3>Build a scene from a photo.</h3><p>Fit simple primitives to a selected subject in Standard or Pro. Pro also reconstructs photo meshes and posed skeletons. Use the resulting scene for layout, occlusion, shadows, and reference.</p></div>
+      <figure class="planned-media">
+        <div id="coffee-scene" class="photo-scene"></div>
+        <figcaption>Inspect the bottle and cup as cylinders, the machine and countertop as boxes, and the wall as a plane. Drag to orbit the approximate blockout.</figcaption>
+      </figure>
+      <p class="margin-note"><strong>Standard:</strong> photo primitives. <strong>Pro:</strong> photo primitives, meshes, and posed skeletons, plus reconstruction from video.</p>
+    </div>
+    <section id="photo-pose-feature" class="photo-reconstruction media-feature" aria-labelledby="photo-pose-title">
+      <div><span class="badge">PRO</span> <small class="photo-beta">Beta</small>
+        <h3 id="photo-pose-title">Trace two poses from a single photo.</h3>
+        <p>Perspectra fits a skeleton to each person in this studio portrait. Check both poses against the photograph in Camera view, then orbit in Overview to see their estimated positions in depth.</p>
+      </div>
+      <div id="portrait-pose-scene" class="photo-scene"></div>
+    </section>
+  </section>
+
+  <section class="section uses" aria-labelledby="uses-title"><div class="section-label"><span>YOUR NEXT STEP</span><span>08 / KEEP CREATING</span></div><h2 id="uses-title">The match is a starting point.</h2><div class="three-notes"><article><span class="use-symbol"><svg class="line-icon" data-feature-icon="composite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="14" height="12" rx="1"/><circle cx="7" cy="7" r="1"/><path d="m3 12 4-3 4 4m3 5 4-3 4 3-4 3Zm4-3v-5m-2 2 2-2 2 2"/></svg></span><h3>Place your CG</h3><p>Stage products, set extensions, shadows, and reflections through the matched camera.</p></article><article><span class="use-symbol"><svg class="line-icon" data-feature-icon="scene-blocks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 5-3 5 3-5 3Zm0 0v7l5 3 5-3v-7m-5 3v7M13 7l4-2 4 2-4 2Zm0 0v3m8-3v7l-4 2-4-2m4-5v7"/></svg></span><h3>Build a scene</h3><p>Use reconstructed objects and people for blocking, occlusion, and animation reference.</p></article><article><span class="use-symbol"><svg class="line-icon" data-feature-icon="render-passes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5-9 5-9-5Zm-9 10 9 5 9-5M3 18l9 5 9-5"/></svg></span><h3>Make reference passes</h3><p>Render depth, normals, or pose references in Blender for your wider AI-video workflow.</p></article></div></section>
+
+
+
+  <section class="section plans" aria-labelledby="plans-title"><div class="section-label"><span>ONE PRODUCT. THREE EDITIONS.</span><span>09 / CHOOSE YOUR WORKFLOW</span></div><h2 id="plans-title">Pay once. Keep creating.</h2><p class="intro">Start with photo camera matching in Lite. Standard adds video tracking, repair, and photo primitives. Pro adds photo meshes and posed skeletons, human motion, and video reconstruction.</p><aside class="launch-banner launch-only" aria-labelledby="launch-title"><div><span class="tag">THROUGH FRIDAY, 27 NOVEMBER</span><h3 id="launch-title">Your first scene starts for less.</h3><p>Save 50% on Lite, Standard, and Pro. One purchase. Keep creating.</p></div><div class="offer-seal" aria-label="50 percent off"><strong>50<span>%</span></strong><span>OFF EVERY EDITION</span></div></aside>
+    <div class="purchase-promise"><div><strong>One payment. Yours to keep.</strong><span>No subscription. Every edition.</span></div><span class="updates-label">Free 1.x updates included</span></div>
+    <div class="plan-grid" id="plan-cards">
+    <article class="plan"><span class="plan-for">FOR PHOTO MATCHING</span><h3>Lite</h3><p class="price"><span class="regular-price"><span class="sr-only">Regular price </span><s>$14</s></span><span class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$7</span><small>one-time purchase<span class="launch-only"> · 50% off</span></small></p><p>Get a camera and scene from a single image.</p><ul><li>Automatic photo camera matching</li><li>Lens distortion correction</li><li>Guides, level verticals, floor + scale</li></ul></article>
+    <article class="plan featured"><span class="plan-for">FOR CAMERA + COMPOSITING</span><h3>Standard</h3><p class="price"><span class="regular-price"><span class="sr-only">Regular price </span><s>$28</s></span><span class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$14</span><small>one-time purchase<span class="launch-only"> · 50% off</span></small></p><p>Match video. Repair the track. Fit photo primitives.</p><ul><li>Everything in Lite</li><li>Video camera tracking, all presets</li><li>Full manual repair workflow</li><li>Primitive fitting from photos</li></ul></article>
+    <article class="plan"><span class="plan-for">FOR PEOPLE + VIDEO GEOMETRY</span><h3>Pro</h3><p class="price"><span class="regular-price"><span class="sr-only">Regular price </span><s>$48</s></span><span class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$24</span><small>one-time purchase<span class="launch-only"> · 50% off</span></small></p><p>Bring motion and geometry into the matched scene.</p><ul><li>Everything in Standard</li><li>Photo meshes</li><li>Posed skeletons from photos <small class="photo-beta">Beta</small></li><li>Human motion from video <small class="photo-beta">Beta</small></li><li>Video object reconstruction</li><li>Textured scans from video</li></ul></article>
+  </div><p class="plan-terms"><span class="launch-only">Launch prices apply until Fri, 27 Nov. </span>Free 1.x updates included. Upgrade later by paying the difference between editions. Prices in USD.</p><aside class="refund-guarantee" aria-labelledby="refund-title">
+    <div class="guarantee-mark" aria-hidden="true"><svg class="line-icon" data-feature-icon="refund-guarantee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="m12 2 8 3v6c0 5-4 8-8 11-4-3-8-6-8-11V5Z"/><path d="M8 10a4 4 0 1 1 1 5m-1-8v3h3"/></svg></div>
+    <div><span class="tag">ALREADY USE A TRACKER OR PERSPECTIVE MATCHER?</span><h3 id="refund-title">30-day money-back guarantee.</h3><p>Try Perspectra with your own shots. If it isn’t a better fit than your existing add-on, or it doesn’t meet your expectations, contact us within <strong>30 days of your Perspectra purchase</strong> for a full refund.</p></div>
+  </aside><details open><summary>Compare Perspectra editions</summary><div class="table-wrap"><table class="edition-table"><caption>Which edition includes each workflow?</caption><thead><tr><th scope="col">Workflow</th><th scope="col">Lite</th><th scope="col">Standard</th><th scope="col">Pro</th></tr></thead><tbody>
+<tr><th scope="rowgroup" colspan="4">Photo camera matching</th></tr>
+<tr><th scope="row">Photo camera matching and lens estimation</th><td>Included</td><td>Included</td><td>Included</td></tr>
+<tr><th scope="row">Lens distortion correction and manual guides</th><td>Included</td><td>Included</td><td>Included</td></tr>
+<tr><th scope="row">Floor alignment and known-size scale</th><td>Included</td><td>Included</td><td>Included</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" colspan="4">Video camera tracking and repair</th></tr>
+<tr><th scope="row">Video camera tracking in Fast, Normal and Best</th><td>—</td><td>Included</td><td>Included</td></tr>
+<tr><th scope="row">Point, edge, surface and block track repair</th><td>—</td><td>Included</td><td>Included</td></tr>
+<tr><th scope="row">Bridge missing frames and smooth camera jitter</th><td>—</td><td>Included</td><td>Included</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" colspan="4">Human pose and motion</th></tr>
+<tr><th scope="row">Trace a human pose from a photo</th><td>—</td><td>—</td><td><small class="photo-beta">Beta</small></td></tr>
+<tr><th scope="row">Capture and edit human motion from video</th><td>—</td><td>—</td><td><small class="photo-beta">Beta</small></td></tr>
+<tr><th scope="row">Fill hidden motion</th><td>—</td><td>—</td><td><small class="photo-beta">Beta</small></td></tr>
+<tr><th scope="row">Track fingers and toes</th><td>—</td><td>—</td><td><small class="photo-beta">Beta</small></td></tr>
+<tr><th scope="row">Retarget captured motion to a compatible FK rig</th><td>—</td><td>—</td><td>Included</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" colspan="4">Object tracking and primitive fitting</th></tr>
+<tr><th scope="row">Fit boxes, cylinders and planes to photos</th><td>—</td><td>Included</td><td>Included</td></tr>
+<tr><th scope="row">Reconstruct moving objects from video</th><td>—</td><td>—</td><td>Included</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" colspan="4">Mesh reconstruction and textured scans</th></tr>
+<tr><th scope="row">Reconstruct meshes from photos</th><td>—</td><td>—</td><td>Included</td></tr>
+<tr><th scope="row">Create textured scans from video</th><td>—</td><td>—</td><td>Included</td></tr>
+</tbody></table></div></details></section>
+
+  <section class="section pro-roadmap" aria-labelledby="roadmap"><span class="badge">PRO</span><h2 id="roadmap">On the Pro roadmap</h2>
+    <div class="roadmap-tracks"><article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l4-9 4 7 5-11 3 5 M4 17l7 3 6-5 3-6"/></svg><h3>Hands, toes and expressions</h3><p>Expand the beta finger and toe tracks into full articulation and add facial performance capture.</p></article>
+    <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18 M5 15a7 7 0 0 1 14 0 M12 2v3 M3 6l2 2 M21 6l-2 2"/></svg><h3>Match the light on set</h3><p>Recover a lighting setup from a photo or clip and export an HDRI so inserted CG picks up the direction and color of the light in the shot.</p></article>
+    <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v11H3z M6 15l4-5 4 3 M15 12q3 3 6-4 M18 8h3v3"/></svg><h3>Continue motion off camera</h3><p>Extend experimental motion completion to longer stretches when part of a performer moves outside the frame.</p></article></div></section>
+
+  <section class="section compare" aria-labelledby="compare-title"><div class="section-label"><span>MAKE AN INFORMED CHOICE</span><span>10 / FEATURES + PRICE</span></div><h2 id="compare-title">Choose the tool for the job.</h2><p class="intro">Compare Lite, Standard, and Pro side by side. Pro combines automatic photo and video camera matching, hands-on tracking repair, human motion, and 3D reconstruction in one Blender workflow.</p><div class="table-wrap all-comparisons" role="region" aria-labelledby="comparison-caption" tabindex="0"><table class="comparison-table" aria-describedby="comparison-key">
+<caption id="comparison-caption">Three Perspectra editions alongside paid camera, reconstruction, and motion tools.</caption>
+<colgroup><col class="workflow-col"></colgroup><colgroup span="3" class="edition-cols"></colgroup><colgroup span="5" class="competitor-cols"></colgroup>
+<thead><tr class="comparison-bands"><th id="cmp-workflow" scope="col" rowspan="2">Workflow</th><th id="cmp-perspectra" scope="colgroup" colspan="3">Perspectra <small>One-time purchase<span class="launch-only"> · launch week −50%</span></small></th><th id="cmp-others" scope="colgroup" colspan="5">Paid alternatives</th></tr><tr class="product-head">
+<th id="cmp-lite" scope="col" headers="cmp-perspectra" class="our-edition lite">Lite<span class="column-price"><span class="regular-price"><span class="sr-only">Regular price </span><s>$14</s></span><span class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$7</span></span></th>
+<th id="cmp-standard" scope="col" headers="cmp-perspectra" class="our-edition standard">Standard<span class="column-price"><span class="regular-price"><span class="sr-only">Regular price </span><s>$28</s></span><span class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$14</span></span></th>
+<th id="cmp-pro" scope="col" headers="cmp-perspectra" class="our-edition pro">Pro<span class="column-price"><span class="regular-price"><span class="sr-only">Regular price </span><s>$48</s></span><span class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$24</span></span></th>
+<th id="cmp-plotter" scope="col" headers="cmp-others" class="competitor"><a class="product-source" href="https://superhivemarket.com/products/perspective-plotter" target="_blank" rel="noopener" aria-label="Perspective Plotter: official features and pricing">Perspective Plotter ↗</a><span class="column-price">$18</span></th>
+<th id="cmp-ct7" scope="col" headers="cmp-others" class="competitor"><a class="product-source" href="https://superhivemarket.com/products/camera-tracker" target="_blank" rel="noopener" aria-label="Camera Tracker 7: official version-specific features">Camera Tracker 7 ↗</a><span class="column-price">$35</span></th>
+<th id="cmp-geo" scope="col" headers="cmp-others" class="competitor"><a class="product-source" href="https://keentools.io/products/geotracker-for-blender" target="_blank" rel="noopener" aria-label="GeoTracker: official features and pricing">GeoTracker ↗</a><span class="column-price">$19.99/mo</span></th>
+<th id="cmp-motiongen" scope="col" headers="cmp-others" class="competitor"><a class="product-source" href="https://superhivemarket.com/products/motiongen" target="_blank" rel="noopener" aria-label="MotionGen Pro: official features and pricing">MotionGen Pro ↗</a><span class="column-price">$29</span></th>
+<th id="cmp-blendcap" scope="col" headers="cmp-others" class="competitor"><a class="product-source" href="https://superhivemarket.com/products/blendcap" target="_blank" rel="noopener" aria-label="BlendCap: official features and pricing">BlendCap ↗</a><span class="column-price">$60</span></th>
+</tr></thead>
+<tbody><tr class="comparison-group"><th id="cmp-group-0" scope="rowgroup" colspan="9">Photo</th></tr>
+<tr data-workflow="photo-camera"><th id="cmp-row-photo-camera" scope="row">Photo camera matching</th>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-lite cmp-perspectra" class="our-edition lite"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-plotter cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-geo cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-camera cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="photo-lens"><th id="cmp-row-photo-lens" scope="row">Lens-distortion correction</th>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-lite cmp-perspectra" class="our-edition lite"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-lens cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="photo-floor-scale"><th id="cmp-row-photo-floor-scale" scope="row">Photo floor + scale</th>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-lite cmp-perspectra" class="our-edition lite"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-plotter cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-geo cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-floor-scale cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="photo-guides"><th id="cmp-row-photo-guides" scope="row">Manual photo guides</th>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-lite cmp-perspectra" class="our-edition lite"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-plotter cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-guides cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="photo-primitives"><th id="cmp-row-photo-primitives" scope="row">Photo primitives</th>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-primitives cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="photo-mesh-people"><th id="cmp-row-photo-mesh-people" scope="row">Photo meshes + posed skeletons</th>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-standard cmp-perspectra" class="our-edition standard"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-0 cmp-row-photo-mesh-people cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+</tbody>
+<tbody><tr class="comparison-group"><th id="cmp-group-1" scope="rowgroup" colspan="9">Video camera</th></tr>
+<tr data-workflow="video-camera"><th id="cmp-row-video-camera" scope="row">Video camera tracking</th>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-ct7 cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-geo cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-motiongen cmp-others" class="competitor"><span class="feature-planned">Planned</span></td>
+<td headers="cmp-group-1 cmp-row-video-camera cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="video-zoom"><th id="cmp-row-video-zoom" scope="row">Tripod / zoom tracking</th>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-ct7 cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-geo cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-zoom cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="camera-repair"><th id="cmp-row-camera-repair" scope="row">Manual video repair</th>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-ct7 cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-geo cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-camera-repair cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="video-floor-scale"><th id="cmp-row-video-floor-scale" scope="row">Video floor + scale</th>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-standard cmp-perspectra" class="our-edition standard"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-ct7 cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-geo cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Manual</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-1 cmp-row-video-floor-scale cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+</tbody>
+<tbody><tr class="comparison-group"><th id="cmp-group-2" scope="rowgroup" colspan="9">Scene + people + reconstruction</th></tr>
+<tr data-workflow="body-motion"><th id="cmp-row-body-motion" scope="row">Video body motion</th>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-standard cmp-perspectra" class="our-edition standard"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-motiongen cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto</span></td>
+<td headers="cmp-group-2 cmp-row-body-motion cmp-blendcap cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+</tr>
+<tr data-workflow="video-geometry"><th id="cmp-row-video-geometry" scope="row">Video geometry reconstruction</th>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-standard cmp-perspectra" class="our-edition standard"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-ct7 cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-video-geometry cmp-blendcap cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+</tr>
+<tr data-workflow="face"><th id="cmp-row-face" scope="row">Facial performance capture</th>
+<td headers="cmp-group-2 cmp-row-face cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-face cmp-standard cmp-perspectra" class="our-edition standard"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-face cmp-pro cmp-perspectra" class="our-edition pro">Planned</td>
+<td headers="cmp-group-2 cmp-row-face cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-face cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-face cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-face cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-face cmp-blendcap cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+</tr>
+<tr data-workflow="digits"><th id="cmp-row-digits" scope="row">Finger and toe tracking</th>
+<td headers="cmp-group-2 cmp-row-digits cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-digits cmp-standard cmp-perspectra" class="our-edition standard"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-digits cmp-pro cmp-perspectra" class="our-edition pro">Beta</td>
+<td headers="cmp-group-2 cmp-row-digits cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-digits cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-digits cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-digits cmp-motiongen cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-digits cmp-blendcap cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Finger tracking</span><span class="feature-method">Fingers</span></td>
+</tr>
+<tr data-workflow="retarget"><th id="cmp-row-retarget" scope="row">Character retargeting</th>
+<td headers="cmp-group-2 cmp-row-retarget cmp-lite cmp-perspectra" class="our-edition lite"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-standard cmp-perspectra" class="our-edition standard"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-pro cmp-perspectra" class="our-edition pro"><span class="feature-yes">✓</span> Included</td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-plotter cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-ct7 cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-geo cmp-others" class="competitor"><span aria-hidden="true">—</span><span class="sr-only">Not included in this workflow</span></td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-motiongen cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto</span></td>
+<td headers="cmp-group-2 cmp-row-retarget cmp-blendcap cmp-others" class="competitor"><span class="feature-yes" aria-hidden="true">✓</span><span class="sr-only">Included</span><span class="feature-method">Auto + Manual</span></td>
+</tr>
+</tbody>
+</table></div><p class="comparison-key" id="comparison-key"><strong>✓ Included</strong> · <strong>— Not included in this workflow</strong> · <strong>Auto</strong> automatic processing · <strong>Manual</strong> user-set guides or geometry · <strong>Auto + Manual</strong> automatic processing with manual setup or editing. Planned features are not included yet.</p>
+<div class="comparison-methods" aria-label="How the workflows differ">
+<p><strong>Floor + scale:</strong> Perspectra estimates both from the image or clip; you can refine the floor and calibrate scale to a known size. Perspective Plotter uses manually placed guides and a reference distance. GeoTracker takes the scene reference from your supplied geometry.</p>
+<p><strong>GeoTracker:</strong> its “model” is a <em>3D mesh you supply</em>, not an AI model. You place pins to align it, then it can solve the camera and track automatically. Zoom is solved automatically after setup. It tracks existing geometry rather than reconstructing a new mesh. <a href="https://keentools.io/products/geotracker-for-blender" target="_blank" rel="noopener">Workflow details ↗</a></p>
+<p><strong>Camera Tracker 7:</strong> choose Normal, Tripod, or 360° and enable Zoom when needed; tracking then runs automatically. It attempts automatic ground alignment, with Ground and Scale tools for manual calibration. Includes an editable mask system, automatic actor masks, and dense point-cloud reconstruction. Actor masks exclude people from camera tracking; they do not generate body animation. <a href="https://cgmatter.github.io/website/html/cameratracker_v7/choose_settings.html" target="_blank" rel="noopener">Settings ↗</a> · <a href="https://cgmatter.github.io/website/html/cameratracker_v7/operators.html" target="_blank" rel="noopener">Editing tools ↗</a></p>
+<p><strong>Manual repair:</strong> Perspectra includes points, edges, surfaces, local refinement, bridges, and block matching. Camera Tracker 7 includes Align, Point, Smooth, Defunk, and mask editing; GeoTracker offers pins and masks.</p>
+</div>
+<div class="edition-takeaways" aria-labelledby="takeaways-title"><h3 id="takeaways-title">What you get with each edition.</h3>
+<article><div class="takeaway-plan"><span>Lite</span><span class="regular-price"><span class="sr-only">Regular price </span><s>$14</s></span><strong class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$7</strong><small class="launch-only">Launch week</small></div><div><h4>Photo matching, with an automatic starting point.</h4><p>Start from automatic lens, depth, and perspective estimates, with lens-distortion correction and manual guides to refine the match. Choose Lite to place your 3D through a camera matched to a single photo.</p><p>Like Perspective Plotter ($18), Lite matches a camera to a still. Automatic camera fitting and wide-angle lens correction give you a starting point before you place guides.</p></div></article>
+<article class="standard-takeaway"><div class="takeaway-plan"><span>Standard</span><span class="regular-price"><span class="sr-only">Regular price </span><s>$28</s></span><strong class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$14</strong><small class="launch-only">Launch week</small></div><div><h4>Two camera workflows. One add-on.</h4><p>Standard combines <strong>photo camera matching and video camera tracking</strong> in the same Blender workflow. Start with everything in Lite, then add automatic video tracking, point/edge/surface/block repair, and primitive fitting from photos.</p><p>Perspective Plotter ($18) and Camera Tracker 7 ($35) cover still and moving cameras for $53 together. Standard brings both workflows into Blender for $28 and adds photo primitives and local track repair.</p></div></article>
+<article class="pro-takeaway"><div class="takeaway-plan"><span>Pro</span><span class="regular-price"><span class="sr-only">Regular price </span><s>$48</s></span><strong class="sale-price launch-only"><span class="sr-only">Launch-week price </span>$24</strong><small class="launch-only">Launch week</small></div><div><h4>A whole scene workflow in one add-on.</h4><p>Pro includes <strong>everything in Lite and Standard</strong>, then adds photo meshes and posed skeletons, human motion, and primitive and mesh reconstruction from video. Match the camera, repair a difficult track, bring in the person and objects, and keep working in the same Blender scene.</p><p>Perspective Plotter ($18), Camera Tracker 7 ($35), MotionGen Pro ($29), and BlendCap ($60) total $142 up front. GeoTracker adds $19.99 per month. That includes two overlapping motion-capture tools. Choosing BlendCap as the sole motion-capture tool brings the total to $113 up front plus $19.99 per month. Pro is $48 once.</p></div></article>
+</div><p class="footnote">Workflow details reviewed 23 November 2026 against the linked documentation. Availability refers to the named workflow in each add-on, not features supplied by a separate tool. These are feature comparisons, not measured accuracy rankings. Prices and release terms may change.</p><div class="comparison-sources"><h3>Sources and pricing notes</h3><ul><li><a href="https://superhivemarket.com/products/perspective-plotter" target="_blank" rel="noopener">Perspective Plotter</a></li><li><a href="https://superhivemarket.com/products/camera-tracker" target="_blank" rel="noopener">Camera Tracker 7</a></li><li><a href="https://keentools.io/products/geotracker-for-blender" target="_blank" rel="noopener">GeoTracker</a></li><li><a href="https://superhivemarket.com/products/motiongen" target="_blank" rel="noopener">MotionGen</a></li><li><a href="https://superhivemarket.com/products/blendcap" target="_blank" rel="noopener">BlendCap</a></li></ul><p>The same availability marks apply to every product. Perspective Plotter’s documented lens-distortion workflow uses Blender’s Movie Clip Editor, so it is not counted as a built-in add-on feature. <a href="https://perspective-plotter.readthedocs.io/en/latest/troubleshooting.html" target="_blank" rel="noopener">Perspective Plotter FAQ ↗</a></p><p>MotionGen Pro is the $29 edition used in this comparison, with a 30-second limit per process. It includes commercial use, body-motion capture, and retargeting. Its license is perpetual, with 12 months of updates and optional renewal. Windows and NVIDIA 2080+ / 8 GB VRAM required.</p><p>BlendCap: $60 individual license. Advertises body, face, fingers, retargeting, foot locking, and motion repair. Windows / Linux; NVIDIA recommended. General scene-camera solving is not advertised.</p><p>Camera Tracker 7: $35 single-seat price. Adds native 360° tracking, mask editing, automatic ground alignment, a Scale tool, and COLMAP/STMap exports. Supports Windows, Apple Silicon macOS, and Linux, with platform-specific acceleration. Dense reconstruction produces a colored point cloud. <a href="https://superhivemarket.com/products/camera-tracker/docs" target="_blank" rel="noopener">Store pricing ↗</a> GeoTracker: $19.99/month or $191.88/year; tracks and textures supplied geometry. Perspective Plotter: $18 with 12 months of updates; extension optional. Prices exclude changing promotions and taxes.</p></div></section>
+
+  <section class="section paper local" aria-labelledby="local-title">
+    <div class="section-label"><span>LOCAL PROCESSING</span><span>11 / FROM INSTALL TO FIRST SHOT</span></div>
+    <h2 id="local-title">Your footage stays<br>on your computer.</h2>
+    <p class="intro">Tracking and reconstruction run locally. Download the models you need, then work with your footage without uploading it to a processing service.</p>
+    <aside class="setup-requirements" aria-labelledby="download-title">
+      <div class="setup-requirement-heading"><svg class="line-icon" data-feature-icon="setup-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg><span class="tag">ONE-TIME ONLINE SETUP</span></div>
+      <h3 id="download-title">Download once. Create offline.</h3>
+      <p>Use the internet for the <strong>one-time setup</strong> of your processing tools, AI models, and their weights. Each required model downloads once and stays on your computer. After setup, that workflow runs offline. You only need to reconnect to add a new model or install updates.</p>
+      <p><strong>Commercial use.</strong> You can use the BootsTAPIR and TAPNext++ point trackers and the MotionBricks motion model, including their weights, in paid client work. Meta’s DINOv2 ADE20K scene-masking weights also permit commercial use. The legacy Swin-T Mask2Former weights offered by the installer carry a noncommercial license.</p>
+      <div class="storage-guide" aria-labelledby="storage-title">
+        <h4 id="storage-title">Make room for the models.</h4>
+        <p>Approximate model-file sizes with all quality modes installed:</p>
+        <dl class="storage-sizes"><div><dt>Lite</dt><dd>~3.6 <span>GB</span></dd><dd class="storage-description">Photo camera models</dd></div><div><dt>Standard</dt><dd>~10.5 <span>GB</span></dd><dd class="storage-description">Photo + video model set</dd></div><div><dt>Pro</dt><dd>~18.5 <span>GB</span></dd><dd class="storage-description">Including optional human refinement</dd></div></dl>
+        <p class="storage-caveat"><strong>Models only—not the total installation size.</strong> Required runtime packages take additional disk space, and tracking caches can grow by several GB for a long clip. There is no fixed maximum for total disk use. Downloading only the modes you use keeps the model footprint smaller.</p>
+      </div>
+    </aside>
+    <ol class="setup-list"><li><strong>Install Perspectra</strong><span>In Blender’s Preferences, choose Install from Disk and select the add-on ZIP.</span></li><li><strong>Download once</strong><span>Connect and press Install in the add-on preferences. Download the models for your selected features and quality modes once, then reuse them offline.</span></li><li><strong>Open your footage</strong><span>Choose a photo or clip in the Perspectra sidebar, then Estimate or Track Video. After its model setup is complete, processing works offline.</span></li></ol>
+    <details><summary>Hardware, models, and compatibility</summary><p>Core workflows support CPU processing, with supported GPUs used where available. Optional refinement tools have additional GPU and Python requirements. Model sizes and license details are listed in Preferences.</p><p>Storage estimates cover the current model catalog across Fast, Normal, and Best. Standard includes the supported GPU tracking models; Pro also includes the optional human-refinement models. Shared files are counted once. Runtime packages, Blender, source footage, and project caches are additional; actual downloads vary by system and selected features.</p><p>The add-on targets Blender 4.2+ on Windows, macOS, and Linux. Confirm the release’s tested Blender and operating-system versions before purchase; optional acceleration varies by system.</p></details>
+  </section>
+
+  <section class="section faq" aria-labelledby="faq-title"><div class="section-label"><span>BEFORE YOUR FIRST SHOT</span><span>12 / PRACTICAL QUESTIONS</span></div><h2 id="faq-title">A few things to know.</h2><details><summary>Does every video track perfectly?</summary><p>No. Blur, occlusion, repeated textures, reflections, cuts, and moving subjects can reduce the available evidence. Start with the automatic solve, inspect it, then use the repair controls for difficult ranges. The examples let you judge the result directly.</p></details><details><summary>Are Fast, Normal, and Best separate purchases?</summary><p>No. They are video-processing presets available in both Standard and Pro. More processing does not guarantee a better result for every shot. Choose the mode that suits your footage, then inspect and refine the track. The gallery shows one selected result for each available clip.</p></details><details><summary>Which photo reconstruction tools are included?</summary><p>Standard includes primitive fitting from photos. Photo mesh reconstruction and posed skeletons require Pro. Pro also adds human animation and object reconstruction from video, including textured scans.</p></details><details><summary>Is the estimated scale exact?</summary><p>Automatic depth provides an estimate. Calibrate with an object or distance of known size when real dimensions matter, and check the floor alignment.</p></details><details><summary>Can I edit the result?</summary><p>Yes. The output is a Blender scene with an editable camera and, for supported reconstruction workflows, geometry and animation. Human poses can be edited and corrections blended into nearby frames. Pro can retarget the performance onto a compatible character rig with editable bone mapping.</p></details></section>
+
+  <section class="section final-cta"><div class="ambient-field" data-ambient aria-hidden="true"><canvas width="800" height="400"></canvas></div><p class="closing-offer launch-only">UNTIL FRI, 27 NOV <span>50% OFF EVERY EDITION</span></p><p class="eyebrow">FROM THE SHOT TO YOUR SCENE</p><h2>Start automatically.<br>Finish with control.</h2><p>Solve the camera in one click, repair a difficult stretch, and bring the performance into Blender with Pro human tracking.</p></section>
+  <footer class="footer"><span class="wordmark">perspectra<span class="brand-dot">.</span></span><span>Made for the scene you want to create.</span></footer>
+</main>
+
+</body>
+</html>

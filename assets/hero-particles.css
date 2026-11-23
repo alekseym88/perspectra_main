@@ -1,0 +1,50 @@
+/* The stage gives the point terrain room around the video, not over it. */
+.hero.section{padding:64px clamp(28px,6vw,48px) 132px}
+.hero::after{opacity:.07}
+.hero .launch-promo{margin:0 0 0}
+.hero .eyebrow{margin-top:42px}
+.hero .hero-facts{margin-top:30px;margin-bottom:40px}
+.hero .product-frame{position:relative;margin-top:0}
+.launch-offer{text-align:left}
+.launch-offer .launch-promo{content-visibility:auto;contain-intrinsic-size:auto none auto 160px}
+.hero .launch-terms{display:flex;justify-content:flex-start;flex-wrap:wrap;gap:2px .45em;margin:16px 2px 0;font-size:13px;line-height:1.5;color:#e1dce9}
+.launch-terms strong{color:#ffdc8b;font-weight:600}
+.hero-terrain{
+  position:absolute;inset:auto -12% 0;block-size:560px;z-index:-1;
+  pointer-events:none;overflow:hidden;content-visibility:auto;
+  contain-intrinsic-size:auto none auto 560px;
+  mask-image:linear-gradient(transparent,#000 18%,#000 94%,transparent);
+  background:radial-gradient(ellipse at 50% 100%,#599dc016,transparent 68%);
+}
+.hero-terrain canvas{width:100%;height:100%;max-width:none;opacity:0}
+.hero-terrain[data-state=running] canvas,.hero-terrain[data-state=paused] canvas{opacity:1}
+.promo-particles{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0}
+/* A gold backing keeps fine particle lettering legible. The entire dot image
+   stays live; original HTML stays in the accessibility tree and is restored
+   immediately when paused, when reduced motion is on, or if WebGL fails. */
+.launch-promo.is-live{background:#e8b94c}
+.launch-promo.is-live::after,.launch-promo.is-live .offer-art,
+.launch-promo.is-live .signal-middle{opacity:0}
+.launch-promo.is-live .promo-particles{opacity:1}
+@media(max-width:600px){
+  .hero.section{padding-top:42px;padding-bottom:116px}
+  .hero-terrain{block-size:480px}
+  .hero .hero-facts{margin-bottom:32px}
+  .hero .launch-terms{font-size:12px}
+}
+@media(max-width:520px){.launch-offer .launch-promo{contain-intrinsic-size:auto none auto 122px}}
+@media(max-width:359px){
+  .hero.section{padding-inline:23px}
+  .hero .launch-promo .signal-middle{padding-inline:12px;gap:6px;grid-template-columns:minmax(0,1fr) 82px}
+  .hero .launch-promo .offer-title{font-size:18px}
+  .hero .launch-promo .offer-value{font-size:48px}
+  .launch-offer .launch-promo{contain-intrinsic-size:auto none auto 108px}
+}
+@media(prefers-reduced-motion:reduce),(forced-colors:active){
+  .hero-terrain,.promo-particles{display:none}
+  .launch-promo.is-live{background:#ffd366;border-color:#ffe7a8;transition:none}
+  .launch-promo.is-live .signal-middle,.launch-promo.is-live .offer-art{opacity:1}
+}
+
+.launch-promo .offer-limit{display:block;font:700 clamp(10px,1.6vw,14px)/1.25 var(--sans);letter-spacing:.04em;color:#38230e;margin-top:5px}
+.launch-terms time{font-weight:750;color:#fff0c5;white-space:nowrap}
