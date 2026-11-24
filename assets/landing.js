@@ -5,6 +5,22 @@
   const url = name => new URL(name, assets).href;
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
+  function setPreviewLoading(button, loading, label = 'Loading tracking data…') {
+    const stage = button.closest('.gallery-stage, .manual-stage, .comparison-stage, .scan-stage');
+    let indicator = stage.querySelector(':scope > .preview-loader');
+    if (loading && !indicator) {
+      indicator = document.createElement('div');
+      indicator.className = 'preview-loader';
+      indicator.setAttribute('role', 'status');
+      stage.append(indicator);
+    }
+    stage.toggleAttribute('data-loading', loading);
+    button.disabled = loading;
+    if (indicator) {
+      indicator.hidden = !loading;
+      indicator.textContent = loading ? label : '';
+    }
+  }
   const loads = new Map();
   const script = (name, refresh=false) => {
     if (name === 'three-r160.min.js' && window.THREE) return Promise.resolve();
@@ -32,7 +48,7 @@
   });
   async function viewer(name, video, poster, mount, state = {}) {
     await script('three-r160.min.js');
-    await script('track-preview.js?v=f6ca2e3d05');
+    await script('track-preview.js?v=1deb0297fa');
     const p = document.createElement('perspectra-preview');
     p.hidden = !!state.hidden;
     if (state.automatic) p.fullscreenTarget = $('#automatic-stage');
@@ -133,6 +149,7 @@
     $('#clip-runtime dd').textContent = Number.isFinite(seconds) ? '≈ ' + runtime : '';
     $('#clip-detail-status').hidden = ready;
     $('#clip-detail-status').textContent = 'Tracking preview pending';
+    setPreviewLoading($('#launch-automatic'), false);
     $('#launch-automatic').disabled = !ready;
     $('#launch-automatic').lastElementChild.textContent = ready ? 'Track video' : 'Tracking preview pending';
     const original = $('#clip-original');
@@ -209,7 +226,7 @@
     const ticket = ++sequence, current = clip, launch = $('#launch-automatic');
     const focusedPlayer = active && document.activeElement === active;
     $('#automatic-cover').hidden = !!active; $('#automatic-message').hidden = true;
-    launch.disabled = true; launch.lastElementChild.textContent = 'Loading tracking data…';
+    setPreviewLoading(launch, true);
     let created;
     try {
       const entry = entryFor(current[0]);
@@ -233,7 +250,7 @@
         $('#automatic-message').textContent = e.message; $('#automatic-message').hidden = false;
       }
     } finally {
-      if (ticket === sequence) { launch.disabled = false; launch.lastElementChild.textContent = active ? 'Track video' : 'Retry camera preview'; }
+      if (ticket === sequence) { setPreviewLoading(launch, false); launch.lastElementChild.textContent = active ? 'Track video' : 'Retry camera preview'; }
     }
   }
   $('#launch-automatic').addEventListener('click', () => loadAutomatic());
@@ -242,7 +259,7 @@
   let manual = null;
   $('#launch-manual').addEventListener('click', async event => {
     const button = event.currentTarget; if (button.disabled) return;
-    button.disabled = true; button.lastElementChild.textContent = 'Loading corrected scene…'; $('#manual-message').hidden = true;
+    setPreviewLoading(button, true, 'Loading corrected track…'); $('#manual-message').hidden = true;
     let videoURL;
     try {
       await script('repair-export.js?v=recovered-64992');
@@ -264,7 +281,7 @@
       if (videoURL) URL.revokeObjectURL(videoURL);
       $('#manual-message').textContent = 'The corrected preview could not load. ' + e.message; $('#manual-message').hidden = false;
       button.lastElementChild.textContent = 'Retry corrected track';
-    } finally { button.disabled = false; }
+    } finally { setPreviewLoading(button, false); }
   });
 
   for (const section of $$('[data-comparison]')) {
@@ -283,7 +300,7 @@
       const mode = current?.mode ?? (kind === 'rig' ? 'overview' : 'camera');
       const resume = current?.pb.playing;
       current?.pause();
-      launch.disabled = true;
+      setPreviewLoading(launch, true);
       message.hidden = true;
       try {
         await script(key + '.js?v=' + (kind === 'rig' ? 'landmarks-1' : 'motion-review-3'));
@@ -317,7 +334,7 @@
           if (current) section.querySelector('input[value="' + current.dataset.variant + '"]').checked = true;
         }
       } finally {
-        if (ticket === sequence) launch.disabled = false;
+        if (ticket === sequence) setPreviewLoading(launch, false);
       }
     }
     launch.addEventListener('click', inspect);
@@ -352,7 +369,8 @@
       canvas.hidden = !isMesh;
       reset.hidden = !isMesh;
       launch.hidden = true;
-      message.textContent = isMesh ? 'Loading mesh…' : '';
+      setPreviewLoading(launch, isMesh, 'Loading mesh…');
+      message.textContent = '';
       if (!isMesh) return;
       try {
         if (loaded !== key) {
@@ -371,6 +389,8 @@
         source.hidden = false;
         scans.querySelector('[value=source]').checked = true;
         message.textContent = 'The 3D view could not load. Showing the source footage.';
+      } finally {
+        if (ticket === sequence) setPreviewLoading(launch, false);
       }
     }
     for (const card of scans.querySelectorAll('[data-scan]')) card.addEventListener('click', () => {
@@ -414,7 +434,7 @@
     if (!launchOverview) poseCover.querySelector('img').src = button.querySelector('img').src;
     for (const card of poseGallery.querySelectorAll('[data-pose]')) card.setAttribute('aria-pressed', String(card === button));
     poseMessage.hidden = true;
-    poseLaunch.disabled = true;
+    setPreviewLoading(poseLaunch, true, 'Loading motion data…');
     try {
       await Promise.all([
         hands ? Promise.resolve() : script(templateFile + '?v=human-display-3'),
@@ -446,7 +466,7 @@
         poseMessage.textContent = 'Could not load this body. ' + error.message;
       }
     } finally {
-      if (ticket === poseTicket) poseLaunch.disabled = false;
+      if (ticket === poseTicket) setPreviewLoading(poseLaunch, false);
     }
   }
   poseLaunch.addEventListener('click', () => {
@@ -485,6 +505,7 @@
           demo.hidden = showImage;
           gallery.querySelector('.media-links').hidden = showImage;
           if (showImage) {
+            setPreviewLoading(launch, false);
             current?.remove();
             current = null;
             return;
@@ -499,13 +520,13 @@
         if (source && card.dataset.original) {
           source.href = card.dataset.original;
           const title = card.querySelector('span').textContent.split(' ·')[0];
-          source.querySelector('span').textContent = source.hasAttribute('download') ? 'Download ' + title + ' footage' : title + ' footage · Pexels';
+          source.querySelector('span').textContent = source.hasAttribute('download') ? 'Download original video' : title + ' footage · Pexels';
         }
       }
       current?.remove();
       current = null;
       cover.hidden = false;
-      launch.disabled = true;
+      setPreviewLoading(launch, true);
       message.hidden = true;
       const key = 'primitive-' + demo.dataset.primitiveScene;
       try {
@@ -525,7 +546,7 @@
         if (ticket !== sequence) return;
         message.textContent = 'Could not load the scene. ' + error.message;
         message.hidden = false;
-      } finally { if (ticket === sequence) launch.disabled = false; }
+      } finally { if (ticket === sequence) setPreviewLoading(launch, false); }
     }
     launch.addEventListener('click', () => inspect());
     for (const card of cards) card.addEventListener('click', () => inspect(card));

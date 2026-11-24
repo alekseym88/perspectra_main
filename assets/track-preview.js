@@ -466,8 +466,6 @@ class Overlay2D {
       labels.push({ prio: hi ? 0 : 2, txt: e.id, col: rgba(e.usable ? EDGE_COL.g : EDGE_COL.n, 1), ax: m[0], ay: m[1] });
       picks.push({ kind: "edge", id: e.id, seg: [a, b], state: "3d" });
     }
-    const pc = V.project(new THREE.Vector3(...d.pose(f).p));
-    if (pc && d.j.comparison !== 'rig') labels.push({ prio: 0, txt: `Camera · ${f}`, col: "#ffd08a", ax: pc[0], ay: pc[1], marker: true });
     this._placeLabels(labels, boxes, opt.labels === "off" ? "off" : "smart", null);
     return picks;
   }
