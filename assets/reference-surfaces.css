@@ -254,26 +254,6 @@
 .gallery-section .tracking-quality dd, .gallery-section .tracking-quality p {color:#39465b}
 .hero .workflow-selected {text-align:left;width:100%}
 .hero .hero-video {position:relative; aspect-ratio:16/9; padding:0; overflow:hidden}
-.hero-still {
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  filter:blur(2px); transform:scale(1.02);
-}
-@media (hover:hover) and (pointer:fine) {
-  .hero-video:hover .hero-still {filter:blur(.5px)}
-}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
-  .hero-still {transition:filter .35s ease}
-  .hero-video:has(.hero-still):hover::after {
-    content:""; position:absolute; inset:0 auto 0 0; width:22%; pointer-events:none;
-    background:linear-gradient(90deg,transparent,rgba(114,221,246,.12) 93%,rgba(175,241,255,.65) 99%,transparent);
-    animation:hero-preview-scan 1.2s ease-in-out both;
-  }
-}
-@keyframes hero-preview-scan {
-  from {transform:translateX(-105%)}
-  to {transform:translateX(460%)}
-}
-.preview-announcement {position:absolute;z-index:1;inset:auto 0 0;text-align:left;padding:12% 6% 5%;background:linear-gradient(transparent,#080914);color:white;font-size:clamp(16px,3vw,28px)}
 .page .comparison-controls {display:flex;align-items:center;flex-wrap:wrap;gap:3px;padding:8px;margin-block:10px;border:none;border-radius:10px;background:#202025;color-scheme:dark}
 .page .comparison-controls legend {float:left;padding:5px 12px;color:#e2e2e7}
 .page .comparison-controls label {min-height:36px;padding:6px 10px;border:0;border-radius:7px;background:transparent;color:#c3c3c8;box-shadow:none}
