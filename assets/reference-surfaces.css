@@ -766,7 +766,7 @@
 .related-grid article {--accent:#ffd28b;display:flex;flex-direction:column;align-items:flex-start;padding:clamp(18px,3vw,32px);border:1px solid #56505a;border-radius:16px;}
 .related-grid p {color:#d1d3df;margin:8px 0 20px}
 .related-demo {position:relative;display:block;align-self:stretch;overflow:hidden;border-radius:10px;margin-bottom:18px}
-.related-demo img {display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:cover}
+.related-demo img {display:block;width:100%;aspect-ratio:16/8;height:auto;object-fit:cover}
 .related-demo span {position:absolute;left:10px;bottom:10px;padding:6px 10px;border-radius:20px;background:#101424ed;color:#fff;font-size:12px;font-weight:700}
 .related-shop {display:inline-flex;align-items:center;gap:12px;margin-top:auto;padding:10px 16px;border-radius:8px;background:var(--accent);color:#18202c;font-weight:700;text-decoration:none}
 .related-shop:hover {filter:brightness(1.08)}
