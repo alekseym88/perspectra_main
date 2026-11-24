@@ -254,6 +254,7 @@
     new ResizeObserver(draw).observe(stage);
     return setPhoto;
   }
+  if (!window.THREE || !window.PerspectraPhotoResults?.length) return;
   const gallery=document.querySelector('#photo-results'), picks=gallery.querySelector('.photo-picks');
   const show=sceneViewer(gallery.querySelector('.photo-scene'));
   for(const d of window.PerspectraPhotoResults){
@@ -264,18 +265,11 @@
       showPortrait(d);
     }
     if(d.id==='coffee'){sceneViewer(document.querySelector('#coffee-scene'))(d);continue}
-    const button=document.createElement('button'),image=document.createElement('img');
-    button.type='button';image.alt='';image.loading='lazy';
-    image.style.setProperty('--thumbnail-ratio', d.width + '/' + d.height);
-    image.src=base+d.id+'-thumb.webp';
-    const caption=document.createElement('span');
-    caption.textContent=d.name;
-    button.append(image,caption);
-    image.width = d.width;
-    image.height = d.height;
-    picks.append(button);button.setAttribute('aria-pressed','false');
+    const button=picks.querySelector('[data-photo="'+d.id+'"]');
+    button.disabled=false;
     button.onclick=()=>{
       for(const item of picks.querySelectorAll('button'))item.setAttribute('aria-pressed',String(item===button));
+      gallery.style.setProperty('--photo-preview', button.querySelector('img').style.backgroundImage);
       show(d);
     };
   }

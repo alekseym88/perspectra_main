@@ -784,3 +784,8 @@
 #manual-cover > img {background:transparent}
 
 .related-demo img[src$="light-painter-product-banner.webp"] {object-fit:contain;background:#10121a}
+
+#photo-results .photo-initial {object-fit:contain;background:var(--preview) center / contain no-repeat #252935}
+.related-demo img[style*="--banner-preview"] {background-image:var(--banner-preview);background-position:center;background-size:cover;background-repeat:no-repeat}
+.related-demo img[src$="light-painter-product-banner.webp"] {background-size:contain}
+#photo-results .scene-stage[data-mode="camera"] {background-image:var(--photo-preview);background-position:center;background-size:contain;background-repeat:no-repeat}
