@@ -265,7 +265,9 @@
     }
     if(d.id==='coffee'){sceneViewer(document.querySelector('#coffee-scene'))(d);continue}
     const button=document.createElement('button'),image=document.createElement('img');
-    button.type='button';image.alt='';image.loading='lazy';image.src=base+d.id+'-thumb.webp';
+    button.type='button';image.alt='';image.loading='lazy';
+    image.style.setProperty('--thumbnail-ratio', d.width + '/' + d.height);
+    image.src=base+d.id+'-thumb.webp';
     const caption=document.createElement('span');
     caption.textContent=d.name;
     button.append(image,caption);

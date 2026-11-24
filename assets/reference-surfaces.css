@@ -635,11 +635,11 @@
   padding-inline:var(--rail-inset);
   scroll-padding-inline:var(--rail-inset);
 }
-#human-clips button img {display:block; width:auto; height:clamp(74px, 19cqw, 146px); aspect-ratio:auto}
+#human-clips button img {--thumb-height:clamp(74px, 19cqw, 146px); display:block; height:var(--thumb-height); width:calc(var(--thumb-height) * var(--thumbnail-ratio,1)); object-fit:contain}
 #photo-results [data-clip-rail] {container-type:inline-size}
 #photo-clips {grid-auto-columns:max-content; padding-bottom:16px}
 #photo-clips button {display:flex; flex-direction:column; align-items:flex-start}
-#photo-clips img {width:auto; height:clamp(80px, 16cqw, 160px)}
+#photo-clips img {--thumb-height:clamp(80px, 16cqw, 160px); display:block; height:var(--thumb-height); width:calc(var(--thumb-height) * var(--thumbnail-ratio,1)); object-fit:contain}
 #photo-clips button > span {align-self:stretch; contain:inline-size}
 #photo-results .photo-run {
   display:grid; grid-template-columns:auto minmax(0,1fr); align-items:start;
@@ -675,7 +675,7 @@
 .primitive-feature [data-clip-rail]:has(.next:not([hidden])) #primitive-clips {--fade-right:44px}
 #primitive-clips button {position:relative; display:flex; flex-direction:column; align-items:flex-start; scroll-snap-align:start}
 #primitive-clips button > span {align-self:stretch; contain:inline-size; overflow-wrap:anywhere}
-#primitive-clips img {display:block; width:auto; height:clamp(139.2px, 24cqw, 252px); aspect-ratio:auto}
+#primitive-clips img {--thumb-height:clamp(139.2px, 24cqw, 252px); display:block; height:var(--thumb-height); width:calc(var(--thumb-height) * var(--thumbnail-ratio,1)); object-fit:contain}
 #primitive-clips .clip-status {
   position:absolute; top:8px; right:8px; padding:3px 7px;
   border-radius:5px; background:#141523ed; color:#fff;
@@ -778,3 +778,9 @@
     transition: transform .2s, box-shadow .2s;
     color: #fff;
 }
+/* Paint the repair shot immediately while the full poster is fetched. */
+#manual-cover {background: center / cover no-repeat url("data:image/webp;base64,UklGRhoBAABXRUJQVlA4IA4BAACwBgCdASowABkAPtVcqU4oJSQiJWzJABqJYwC5IDnfM2thZwCuPWNTadPP3HueAQuYDDbs2RHJIIB8HwEQAAD++E6PAwUAehVWkzVarl58Grsmo5TvFj0v8ZhLqo7DdegtmJiYbb4aBirk++o5lcQCI0DK8CzI74GzrCjsSuvkZQ/99nGBdIhyZmswGmR2vZrgAhq0Bi3wA39foxiQi7hX355SN88vS1jca/OjT88X54TxIDAzt2M7Epg7uJ99jT7EvyAONiWjztKHjfuhpxETPAwiQ1BBB3S1YcssxVmdXdks7PhsXbJftwQUKC7RF3yxv6ksOKVck96rkJeQu/V+bB59iA9FtjvaXdcAAAA=")}
+.demo-cover > img[loading="lazy"], .thumbnails img[loading="lazy"] {background-image:linear-gradient(125deg,#292b39,#40465a 54%,#282a36)}
+#manual-cover > img {background:transparent}
+
+.related-demo img[src$="light-painter-product-banner.webp"] {object-fit:contain;background:#10121a}

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/landing.css?v=3d06e992c1">
-  <link rel="stylesheet" href="assets/reference-surfaces.css?v=8ea12a3b33">
+  <link rel="stylesheet" href="assets/reference-surfaces.css?v=03fac88444">
   <link rel="stylesheet" href="assets/hero-particles.css?v=tracking-points-2">
   <script defer src="assets/manifest.js?v=0eeec772b5"></script>
   <script defer src="assets/three-r160.min.js"></script>
@@ -18,7 +18,7 @@
   <script defer src="assets/ambient-shader.js?v=review-8"></script>
   <script defer src="assets/hero-particles.js?v=orange-points-3"></script>
   <script defer src="assets/photo-gallery/results.js?v=01085563c9"></script>
-  <script defer src="assets/photo-gallery/viewer.js"></script>
+  <script defer src="assets/photo-gallery/viewer.js?v=ad945fd29c"></script>
 </head>
 <!-- Launch pricing runs through 27 November in Hong Kong. -->
 <body data-launch-offer="true">
@@ -57,7 +57,7 @@
     <div class="product-frame"><div class="hud-top"><span>● PERSPECTRA / MADE FOR BLENDER</span><span>PHOTO · VIDEO · 3D</span></div>
     <div class="hero-video">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <img class="hero-still" src="assets/old-town-returns.jpg" alt="Tracked landmarks on a street as a scooter passes"><strong class="preview-announcement">Full preview video coming soon on YouTube</strong></div>
+      <img width="960" height="540" class="hero-still" src="assets/old-town-returns.jpg" alt="Tracked landmarks on a street as a scooter passes"><strong class="preview-announcement">Full preview video coming soon on YouTube</strong></div>
     <div class="hud-bottom"><span>BETTER CAMERA MATCHING</span><span>FULL CONTROL</span></div></div>
     
     <div class="workflow-options" id="workflow-options">
@@ -157,9 +157,9 @@
       <h3 id="still-camera-title" style="font-size: 22px; margin-top: 8px;">Track camera with minimal parallax.</h3>
       <p style="line-height: 1.5;margin-bottom: 24px;">Traditional trackers struggle with little parallax or only a few points to track. Perspectra uses <b>an additional image-processing pass</b> to analyze the entire frame, finding visual clues that help estimate the camera even when movement and trackable details are limited.</p>
       <div class="thumbnails camera-study-cards" role="group" aria-label="Choose a tabletop camera track">
-        <button type="button" data-original="assets/originals/6608007-uhd_2160_4096_30fps.mp4" data-primitive="bottle" data-mesh-revision="575fa62a9b" data-footage="bottle" data-frame="1" data-caption="A 79.1 mm camera stays fixed while the reeds move. The dots show verified landmarks around the fitted cylinder." aria-pressed="true"><img loading="lazy" src="assets/full/bottle/poster.webp" alt=""><span>Diffuser bottle</span></button>
-        <button type="button" data-original="assets/originals/17609683_1080_1920_30fps.mp4" data-primitive="ceramics" data-mesh-revision="86f11398e5" data-footage="ceramics" data-frame="1" data-caption="Follow the tracked details on the textured clay as the framing shifts." aria-pressed="false"><img loading="lazy" src="assets/full/ceramics/poster.webp" alt=""><span>Ceramic teapots</span></button>
-        <button type="button" data-original="assets/originals/10140551-uhd_4096_2160_25fps.mp4" data-primitive="glassware" data-mesh-revision="edfaf47248" data-footage="glassware" data-frame="1" data-caption="Perspectra fits a cylinder to each selected object using its mask and estimated depth. In Camera view, open Overlay options and toggle Mesh to compare the three cylinders with the footage." aria-pressed="false"><img loading="lazy" src="assets/full/glassware/poster.webp" alt=""><span>Glass and books</span></button>
+        <button type="button" data-original="assets/originals/6608007-uhd_2160_4096_30fps.mp4" data-primitive="bottle" data-mesh-revision="575fa62a9b" data-footage="bottle" data-frame="1" data-caption="A 79.1 mm camera stays fixed while the reeds move. The dots show verified landmarks around the fitted cylinder." aria-pressed="true"><img width="506" height="960" loading="lazy" src="assets/full/bottle/poster.webp" alt=""><span>Diffuser bottle</span></button>
+        <button type="button" data-original="assets/originals/17609683_1080_1920_30fps.mp4" data-primitive="ceramics" data-mesh-revision="86f11398e5" data-footage="ceramics" data-frame="1" data-caption="Follow the tracked details on the textured clay as the framing shifts." aria-pressed="false"><img width="360" height="640" loading="lazy" src="assets/full/ceramics/poster.webp" alt=""><span>Ceramic teapots</span></button>
+        <button type="button" data-original="assets/originals/10140551-uhd_4096_2160_25fps.mp4" data-primitive="glassware" data-mesh-revision="edfaf47248" data-footage="glassware" data-frame="1" data-caption="Perspectra fits a cylinder to each selected object using its mask and estimated depth. In Camera view, open Overlay options and toggle Mesh to compare the three cylinders with the footage." aria-pressed="false"><img width="640" height="337" loading="lazy" src="assets/full/glassware/poster.webp" alt=""><span>Glass and books</span></button>
       </div>
       <div class="demo-shell" data-primitive-scene="bottle" data-mesh-revision="575fa62a9b" data-footage="bottle" data-frame="1" >
       <div class="comparison-stage"><div class="demo-cover"><img loading="lazy" width="960" height="540" src="assets/full/bottle/poster.webp" alt=""><button class="play-launch" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button></div><div class="comparison-viewer"></div></div>
@@ -236,11 +236,11 @@
     <div id="preview-pose-8688810" class="pose-gallery">
       <div class="clip-catalog pose-catalog" data-clip-rail>
         <div class="thumbnails pose-rail" id="human-clips" role="group" aria-label="Human motion clips">
-          <button type="button" data-pose="pose-8688810" data-poster-frame="1" aria-pressed="true"><img loading="lazy" src="assets/full/pose-8688810/poster.webp?v=c72eb4de40cc" alt=""><span>Two dancers</span><small>Frames 1–274</small></button>
-          <button type="button" data-pose="pose-6868294" data-poster-frame="1" aria-pressed="false"><img loading="lazy" src="assets/full/pose-6868294/poster.webp?v=eb1dc9d191b3" alt=""><span>Single dance</span><small>Frames 1–233</small></button>
-          <button type="button" data-pose="pose-8721779" data-poster-frame="1" aria-pressed="false"><img loading="lazy" src="assets/full/pose-8721779/poster.webp?v=8568bcabc258" alt=""><span>Walking</span><small>Frames 1–396</small></button>
-          <button type="button" data-pose="pose-21827" data-poster-frame="89" aria-pressed="false"><img loading="lazy" src="assets/full/pose-21827/poster.webp?v=9be4a050a8f3" alt=""><span>Breakdancing</span><small>Frames 1–176</small></button>
-          <button type="button" data-pose="pose-skater" data-poster-frame="186" aria-pressed="false"><img loading="lazy" src="assets/full/pose-skater/poster.webp?v=e2cf8346f38e" alt=""><span>Skatepark</span><small>Frames 1–371</small></button>
+          <button type="button" data-pose="pose-8688810" data-poster-frame="1" aria-pressed="true"><img style="--thumbnail-ratio:540/960" width="540" height="960" loading="lazy" src="assets/full/pose-8688810/poster.webp?v=c72eb4de40cc" alt=""><span>Two dancers</span><small>Frames 1–274</small></button>
+          <button type="button" data-pose="pose-6868294" data-poster-frame="1" aria-pressed="false"><img style="--thumbnail-ratio:540/960" width="540" height="960" loading="lazy" src="assets/full/pose-6868294/poster.webp?v=eb1dc9d191b3" alt=""><span>Single dance</span><small>Frames 1–233</small></button>
+          <button type="button" data-pose="pose-8721779" data-poster-frame="1" aria-pressed="false"><img style="--thumbnail-ratio:540/960" width="540" height="960" loading="lazy" src="assets/full/pose-8721779/poster.webp?v=8568bcabc258" alt=""><span>Walking</span><small>Frames 1–396</small></button>
+          <button type="button" data-pose="pose-21827" data-poster-frame="89" aria-pressed="false"><img style="--thumbnail-ratio:720/406" width="720" height="406" loading="lazy" src="assets/full/pose-21827/poster.webp?v=9be4a050a8f3" alt=""><span>Breakdancing</span><small>Frames 1–176</small></button>
+          <button type="button" data-pose="pose-skater" data-poster-frame="186" aria-pressed="false"><img style="--thumbnail-ratio:720/406" width="720" height="406" loading="lazy" src="assets/full/pose-skater/poster.webp?v=e2cf8346f38e" alt=""><span>Skatepark</span><small>Frames 1–371</small></button>
         </div><button class="clip-arrow previous" type="button" aria-controls="human-clips" aria-label="Previous examples" hidden></button><button class="clip-arrow next" type="button" aria-controls="human-clips" aria-label="Next examples" hidden></button>
       </div>
       <div class="demo-shell">
@@ -264,7 +264,7 @@
     <p class="intro">Click on an object in your photo or video, and Perspectra identifies its shape and creates a matching 3D primitive or reconstructs a detailed mesh with textures. For videos, it can also track the selected object throughout the clip. Use the generated geometry to place your own 3D models accurately, create realistic shadows, and handle occlusion.</p>
     <div class="clip-catalog" data-clip-rail><div id="primitive-clips" class="thumbnails" role="group" aria-label="Choose fitted primitives">
         <button type="button" id="preview-pillar" data-primitive="pillar" data-footage="garage" data-frame="601" data-caption="Orbit to inspect the fitted pillars, or scrub in Camera view to check their edges." data-original="https://videos.pexels.com/video-files/7121125/7121125-uhd_4096_2160_25fps.mp4" aria-pressed="true"><img loading="lazy" width="960" height="506" src="assets/geometry-poster.webp" alt=""><span>Garage · pillars</span><small class="clip-status">Video</small></button>
-        <button type="button" data-primitive="coffee" data-image aria-pressed="false"><img loading="lazy" width="1024" height="1024" src="assets/rgb.jpeg" alt=""><span>Coffee counter</span><small class="clip-status">Image</small></button>
+        <button type="button" data-primitive="coffee" data-image aria-pressed="false"><img style="--thumbnail-ratio:1024/1024" loading="lazy" width="1024" height="1024" src="assets/rgb.jpeg" alt=""><span>Coffee counter</span><small class="clip-status">Image</small></button>
         <button type="button" id="preview-boxes" data-primitive="boxes" data-mesh-revision="280cecd628" data-footage="boxes" data-frame="1" data-caption="The camera moves through 15 fixed carton meshes. Scrub to compare their visible edges with the footage. Hidden corners are estimated." data-original="https://videos.pexels.com/video-files/4553292/4553292-uhd_4096_2160_25fps.mp4" aria-pressed="false"><img loading="lazy" width="960" height="506" src="assets/full/boxes/poster.webp" alt=""><span>Stacked cartons</span><small class="clip-status">Video</small></button>
         <button type="button" id="preview-bottle" data-primitive="bottle" data-mesh-revision="575fa62a9b" data-footage="bottle" data-frame="1" data-caption="Compare the cylinder rim and base with the bottle, then orbit to see the fit in depth." data-original="https://videos.pexels.com/video-files/6608007/6608007-uhd_2160_4096_30fps.mp4" aria-pressed="false"><img loading="lazy" width="506" height="960" src="assets/full/bottle/poster.webp" alt=""><span>Diffuser bottle</span><small class="clip-status">Video</small></button>
     </div><button class="clip-arrow previous" type="button" aria-label="Previous examples" aria-controls="primitive-clips" hidden></button><button class="clip-arrow next" type="button" aria-label="Next examples" aria-controls="primitive-clips" hidden></button></div>
@@ -289,12 +289,12 @@
   <section class="section pro-feature mesh-feature" aria-labelledby="mesh-title"><div class="section-label"><span class="pro-label">PRO</span>
     <span>06 / RECONSTRUCTED MESHES</span></div><h2 id="mesh-title">Go beyond a simple shape.</h2><p class="intro">Reconstruct detailed 3D meshes from photos or videos, using multiple views to recover the object's shape and textures. Turn everyday footage into useful 3D assets you can edit and use directly in Blender.</p><div class="scan-gallery">
       <div class="clip-catalog"><div class="thumbnails scan-clips" role="group" aria-label="Choose a reconstructed object">
-        <button type="button" data-scan="sneaker" data-original="originals/sneaker_360.mp4" data-source="sneaker-source.mp4" aria-pressed="true"><img loading="lazy" src="assets/sneaker-poster.webp" alt=""><span>Sneaker</span></button>
-        <button type="button" data-scan="orange" data-original="originals/10239994-uhd_3840_2160_24fps.mp4" data-source="scans/orange/source.mp4" aria-pressed="false"><img loading="lazy" src="assets/scans/orange/poster.webp" alt=""><span>Mandarin</span></button>
+        <button type="button" data-scan="sneaker" data-original="originals/sneaker_360.mp4" data-source="sneaker-source.mp4" aria-pressed="true"><img width="800" height="600" loading="lazy" src="assets/sneaker-poster.webp" alt=""><span>Sneaker</span></button>
+        <button type="button" data-scan="orange" data-original="originals/10239994-uhd_3840_2160_24fps.mp4" data-source="scans/orange/source.mp4" aria-pressed="false"><img width="720" height="406" loading="lazy" src="assets/scans/orange/poster.webp" alt=""><span>Mandarin</span></button>
       </div></div>
       <div class="demo-shell">
         <fieldset class="comparison-controls motion-cards"><legend>View</legend><label><input type="radio" name="scan-view" value="mesh" checked><strong>Textured mesh</strong><small>Orbit the reconstructed surface.</small></label><label><input type="radio" name="scan-view" value="source"><strong>Source footage</strong><small>Play the clip used for reconstruction.</small></label></fieldset>
-        <div class="scan-stage"><img class="scan-cover" loading="lazy" src="assets/sneaker-poster.webp" alt="Sneaker on the turntable"><canvas tabindex="0" aria-label="Orbit the reconstructed object" hidden></canvas>
+        <div class="scan-stage"><img width="800" height="600" class="scan-cover" loading="lazy" src="assets/sneaker-poster.webp" alt="Sneaker on the turntable"><canvas tabindex="0" aria-label="Orbit the reconstructed object" hidden></canvas>
           <video controls muted playsinline loop preload="none" hidden></video>
           <button type="button" class="play-launch"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/><circle cx="12" cy="12" r="4"/></svg><span>Track video</span></button>
         </div>
@@ -627,7 +627,7 @@
     <div class="related-grid">
       <article>
         <a class="related-demo" href="https://www.youtube.com/watch?v=S1y76nFG-4w" target="_blank" rel="noopener" aria-label="Watch the Light Painter demo on YouTube">
-          <img src="assets/light-demo-banner.webp" width="960" height="540" loading="lazy" alt="">
+          <img src="assets/light-painter-product-banner.webp" width="1200" height="600" loading="lazy" alt="">
           <span aria-hidden="true">▶ &nbsp;Watch demo</span>
         </a>
         <h3>Light Painter</h3>
