@@ -169,15 +169,14 @@
     uniform vec3 pointer;
     varying vec4 color;
     vec3 gold(float value){
-      // Amber, ochre, honey, gold, lemon and cream, with continuous shading.
-      float v=clamp(value,0.,.999)*5.;
-      vec3 a=vec3(.72,.34,.035),b=vec3(.88,.52,.055);
-      if(v>=1.){a=b;b=vec3(1.,.68,.12);}
-      if(v>=2.){a=b;b=vec3(1.,.81,.26);}
-      if(v>=3.){a=b;b=vec3(1.,.91,.48);}
-      if(v>=4.){a=b;b=vec3(1.,.98,.77);}
-      return mix(a,b,fract(v));
-    }
+  float v=clamp(value,0.,.999)*5.;
+  vec3 a=vec3(.72,.39,.055),b=vec3(.88,.56,.12);
+  if(v>=1.){a=b;b=vec3(1.,.70,.22);}
+  if(v>=2.){a=b;b=vec3(1.,.81,.38);}
+  if(v>=3.){a=b;b=vec3(1.,.89,.57);}
+  if(v>=4.){a=b;b=vec3(1.,.96,.78);}
+  return mix(a,b,fract(v));
+}
     vec3 liquid(vec2 uv,float t){
       vec2 q=vec2(uv.x*3.,uv.y);
       float a=q.y*5.+sin(q.x*2.-t*.65)*1.5;
@@ -189,7 +188,7 @@
       vec2 point=target;
       // Ink and gold follow the SAME smooth field to keep the image registered.
       // Tiny per-dot drift adds fluid texture without dissolving the lettering.
-      float ink=1.-step(.5,rgba.r);
+      float ink=step(.5,rgba.r);
       vec2 uv=target/resolution;
       vec3 surface=liquid(uv,time);
       float edge=smoothstep(0.,.07,uv.x)*smoothstep(0.,.07,1.-uv.x)*
@@ -207,7 +206,10 @@
       gl_Position=vec4(point.x/resolution.x*2.-1.,1.-point.y/resolution.y*2.,0.,1.);
       gl_PointSize=detail.x*pixelRatio;
       vec3 shaded=gold(clamp(rgba.g+surface.z,.12,1.));
-      color=vec4(mix(shaded,rgba.rgb,ink),rgba.a);
+      color=vec4(
+      mix(shaded, vec3(.025,.019,.012), ink),
+      rgba.a
+    );
     }`;
 
   // Read individual text-line rectangles, then draw glyphs with the same font.

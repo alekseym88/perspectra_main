@@ -216,8 +216,7 @@
 /* Clear typography and softer full-bleed color at the bottom of each edition. */
 .plan{padding-bottom:29px}
 .plan h3{font-size:24px}
-.plan .price{padding-block:8px 17px;border-bottom:1px solid #d5dbef26}
-.plan>p:not(.price){padding-top:12px}
+.plan .price{padding-block:8px 17px;}
 .plan li{line-height:1.55}
 
 @media(max-width:590px){
