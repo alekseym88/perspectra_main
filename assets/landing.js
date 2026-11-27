@@ -1,6 +1,7 @@
 (() => {
   'use strict';
-  if (Date.now() >= Date.parse('2026-11-28T00:00:00+08:00')) document.body.dataset.launchOffer = 'false';
+  const saleEndsAt = document.querySelector('#launch-terms time').dateTime;
+  if (Date.now() > Date.parse(saleEndsAt)) document.body.dataset.launchOffer = 'false';
   const assets = new URL('.', document.currentScript.src);
   const url = name => new URL(name, assets).href;
   const $ = selector => document.querySelector(selector);
